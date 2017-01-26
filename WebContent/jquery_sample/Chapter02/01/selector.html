@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	
+	//모든 태그 잡기
+	//$('li').css("color","red");
+	
+	//아이디가 id='li1' 만 잡기
+	//$('#li1').css("color","red");
+	
+	//클래스가 liClass만 잡기
+	//$('.liClass').css("color","red");
+	
+	//자식? 태그 바로 밑의 태그
+	//자손? 태그 밑의 자식들 모두
+	//한칸 띄면 태그 아래 모든 자손 태그를 잡는다.
+	
+	//$('#li2 *').css("color","red");
+	
+	
+	// 셀렉터,셀렉터
+	
+	//$('#li3,#li4').css("color","red");
+	
+	//바로 밑의 자식 태그를 찾기
+	//$('#li4 > span').css("color","red");
+	
+	//인접 태그 찾기
+	//$('#li2 + li').css("color","red");
+	
+	//묶음 중에서 firstCild 찾기
+	//$('li:first-child').css("color","red");
+	
+	//간접 셀렉터
+	//$('#li2 ~ li').css("color","red");
+	
+	//not 사용
+	
+	$("li:only-child").css("color","red");
+	
+	
+	
+	
+})
+
+</script>
+
+</head>
+<body>
+
+
+<ul>
+<li id="li1" class="liClass">텍스트1</li>
+<li id="li2" class="liClass"><span>텍스트2</span><span>텍스트2</span><span>텍스트2</span></li>
+<li id="li3" class="liClass">텍스트3</li>
+<li id="li4" class="liClass"><span>텍스트4<span></li>
+</ul>
+
+
+
+<ul>
+<li>텍스트1</li>
+<li><span>텍스트2</span><span>텍스트2</span><span>텍스트2</span></li>
+<li>텍스트3</li>
+<li><span>텍스트4<span></li>
+</ul>
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+function change(rad){
+	
+	document.bgColor=rad.value;
+	
+	if(rad.defaultChecked==true){
+		document.bgColor="yellow";
+	}
+	
+	
+}
+
+</script>
+
+<input type="radio" name="color" value="white" onclick="change(this);">하얀색<br>
+<input type="radio" name="color" value="black"  onclick="change(this);">검은색<br>
+<input type="radio" name="color" value="red"   onclick="change(this);">빨간색<br>
+<input type="radio" name="color" value="green"  onclick="change(this);">초록색<br>
+
+
+</body>
+</html>

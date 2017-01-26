@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>FloatingWindow</title>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+$(function(){
+	$("a.open").click(function(){
+		$("#floatWindow").fadeIn("fast");
+		return false;
+	});
+	
+	$("#floatWindow a.close").click(function(){
+		$("#floatWindow").fadeOut("fast");
+		return false;
+	});
+	$("#floatWindow dl dt").mousedown(function(e){
+		
+		$("#floatWindow")
+			.data("clickPointX" , e.pageX - $("#floatWindow").offset().left)
+			.data("clickPointY" , e.pageY - $("#floatWindow").offset().top);
+		
+		$(document).mousemove(function(e){
+			$("#floatWindow").css({
+				top:e.pageY  - $("#floatWindow").data("clickPointY")+"px",
+				left:e.pageX - $("#floatWindow").data("clickPointX")+"px"
+			});
+		});
+	}).mouseup(function(){
+		$(document).unbind("mousemove");
+	});
+});
+		</script>
+		<style type="text/css">
+#floatWindow{
+	display:none;
+	position:absolute;
+	width:500px;
+	height:400px;
+	top:100px;
+	left:100px;
+}
+#floatWindow a.close{
+	position:absolute;
+	right:20px;
+	top:1px;
+}
+#floatWindow a.close img{
+	border:none;
+}
+#floatWindow dl{
+	width:100%;
+	height:100%;
+	background:url("./images/floatWindow.png");
+	margin:0;
+}
+#floatWindow dl dt{
+	height:25px;
+	line-height:25px;
+	text-indent:1em;
+	color:white;
+	font-weight:bold;
+	cursor:move;
+}
+#floatWindow dl dd{
+	margin:0;
+	padding:2em;
+	line-height:1.5;
+	text-indent:1em;
+}
+
+		</style>
+	</head>
+	<body>
+		
+		<a href="#floatWindow" class="open">플로우팅 윈도우 표시</a>
+		
+		<div id="floatWindow">
+			<a href="sample1.html" class="close"><img src="./images/close.png" alt="닫힘" /></a>
+			<dl>
+				<dt>jQuery를 이용하여 플로우팅 윈도우 만들기</dt>
+				<dd>이번에는 jQuery를 이용하여 플로우팅 윈도우..(중략)...윈도우를 표시할 수 있습니다.</dd>
+			</dl>
+		</div>
+	</body>
+</html>

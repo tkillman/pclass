@@ -1,0 +1,59 @@
+﻿<!DOCTYPE htm>
+<html>
+<head>
+<title> 아코디언판넬 </title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+$(function(){
+$("dd:not(:first)").css("display","none");
+$("dl dt").click(function(){
+if($("+dd",this).css("display")=="none"){
+$(this).siblings("dd").slideUp("slow");
+$("+dd",this).slideDown("slow");
+}
+});
+}); 
+</script>
+<style type="text/css">
+*{
+margin:0;
+padding:0;
+}
+dl{
+width:400px;
+margin:50px auto;
+}
+dl dt{
+background:#7CADB6;
+border-bottom:1px solid #FFFFFF;
+cursor:pointer;
+}
+dl dd{
+border:1px solid #7CADB6;
+border-top:none;
+height:300px;
+}
+</style>
+</head>
+<body>
+<div id="container">
+<dl>
+<dt> 텍스트1</dt>
+<dd>
+<p> 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트
+텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 </p>
+</dd>
+<dt> 텍스트 2</dt>
+<dd>
+<p> 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트
+텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 </p>
+</dd>
+<dt> 텍스트 3</dt>
+<dd>
+<p> 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트
+텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 텍스트 </p>
+</dd> 
+</dl>
+</div>
+</body>
+</html>

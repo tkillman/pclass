@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>RpllOver </title>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+$(function(){
+	$("img.rollover").mouseover(function(){
+		$(this).attr("src",$(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2"));
+	}).mouseout(function(){
+		$(this).attr("src",$(this).attr("src").replace(/^(.+)_on(\.[a-z]+)$/, "$1$2"));
+	}).each(function(){
+		$("<img>").attr("src",$(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2"));
+	});
+});
+		</script>
+		<style type="text/css">
+div{
+	width:600px;
+	height:400px;
+	background:url("images/background.jpg");
+	margin:100px auto;
+}
+ul{
+	padding: 10px;
+	margin:0;
+}
+ul li{
+	width:140px;
+	height:40px;
+	list-style-type:none;
+	float:left;
+}
+ul li img{
+	width:140px;
+	height:40px;
+	border:none;
+}
+		</style>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li><a href="#"><img src="images/jquery.png" alt="jQuery" class="rollover" /></a></li>
+				<li><a href="#"><img src="images/javascript.png" alt="javascript" class="rollover" /></a></li>
+				<li><a href="#"><img src="images/css.png" alt="CSS" class="rollover" /></a></li>
+				<li><a href="#"><img src="images/html.png" alt="HTML" class="rollover" /></a></li>
+			</ul>
+		</div>
+	</body>
+</html>

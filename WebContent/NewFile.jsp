@@ -50,7 +50,9 @@
 
 		x.value = result;
 
+		
 	}
+	
 </script>
 </head>
 <body>

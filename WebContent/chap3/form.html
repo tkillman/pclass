@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script>
+
+function checkForm(form){
+	
+	if(form.idText.value.trim()==0){
+		alert("아이디를 입력해주세요.")
+		return;
+	}
+	
+	if(form.pwText.value.trim()==0){
+		alert("비밀번호를 입력해주세요.")
+		return;
+	}
+	
+	if(form.pwText.value!=form.pwTextCheck.value){
+		alert("비밀번호를 정확히 입력해주세요.")
+		return;
+	}
+	
+	if(form.userName.value.trim()==0){
+		alert("사용자 이름을 입력해주세요.")
+		return;
+	}
+	
+	form.submit();
+	
+}
+
+</script>
+
+
+</head>
+<body>
+
+
+
+<form onclick="checkFrom(this);">
+<table col="2">
+<tr>
+회원가입
+</tr>
+
+<tr>
+<td>아이디 입력</td>
+</tr>
+
+
+<tr>
+<td>사용자 ID : <input type="text" name="idText" id="idText"></td><td><input type="button" value="ID중복확인"></td>
+</tr>
+
+
+<tr>
+<td>비밀번호 : <input type="text" name="pwText"></td>
+</tr>
+
+
+<tr>
+<td>비밀번호 확인: <input type="text" name="pwTextCheck"></td>
+</tr>
+
+
+<tr>
+<td>개인정보입력</td>
+</tr>
+
+
+<tr>
+<td>사용자 이름 <input type="text" name="userName"></td>
+</tr>
+
+
+<tr>
+<td>주민등록번호 <input type="text">-</td> <td><input type="text"></td>
+</tr>
+
+
+<tr>
+<td>E-mail <input type="text"></td>
+</tr>
+
+
+<tr>
+<td>Blog <input type="text"></td>
+</tr>
+
+
+<tr>
+<td>우편번호 <input type="text"><input type="button" value="우편번호찾기"> 우편번호를 검색하세요.</td>
+</tr>
+
+
+<tr>
+<td>주소 <input type="text"> 주소를 적어 주세요.</td>
+</tr>
+
+
+<tr>
+<td><input type="button" value="등록" onclick="checkForm(this.form)"><input type="reset" value="다시입력"> <input type="reset" value="가입안함"></td>
+</tr>
+
+</table>
+</form>
+
+
+
+</body>
+</html>

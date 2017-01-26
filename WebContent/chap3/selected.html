@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+function change(form){
+
+	document.bgColor= form.sele.value;
+	
+}
+
+</script>
+
+
+
+
+<form>
+
+
+<select name="sele">
+<option value="red">레드</option>
+<option value="green">초록</option>
+<option value="white">하얀</option>
+<option value="yellow">노랑</option>
+</select>
+
+
+<input type="button" value= "변해라" onclick="change(this.form);">
+
+
+</form>
+</body>
+</html>

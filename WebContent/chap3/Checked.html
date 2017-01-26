@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+
+function findCheck(form){
+	
+	if(form.checkbox1.defaultChecked==true){
+		console.log(form.checkbox1.value);
+	}
+	
+	
+	if(form.checkbox2.checked==true){
+		console.log(form.checkbox2.value);
+	}
+	
+	
+}
+
+function joggingCheck(){
+	alert("조깅 선택");
+}
+
+
+</script>
+
+
+
+
+<form>
+<input type="checkbox"  name="checkbox1" value="swim" >수영
+<input type="checkbox" name="checkbox2" value="jogging" onclick="joggingCheck();">조깅
+<input type="button" onclick="findCheck(this.form)" value="체크버튼">
+</form>
+</body>
+</html>

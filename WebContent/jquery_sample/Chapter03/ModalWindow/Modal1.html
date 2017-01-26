@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	<title>Modal1 </title>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script>
+		$(function(){
+			$("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
+			
+			$("#glayLayer").click(function(){
+				$(this).hide()
+				$("#overLayer").hide();
+			});
+			
+			$("a.modal").click(function(){
+				$("#glayLayer").show();
+				$("#overLayer").show().html("<img src='"+$(this).attr("href")+"' />");
+				return false;
+			});
+			
+			if($.browser.msie && $.browser.version<7){
+				$(window).scroll(function(){
+					$("#glayLayer").css('top',$(document).scrollTop());
+					$("#overLayer").css('top',($(document).scrollTop()+$(window).height()/2) +"px");
+				});
+			}
+			
+		});
+		</script>
+		<style type="text/css">
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;
+}
+h1{
+	margin:20px 50px;
+	font-size:large;
+	border-left:10px solid #7BAEB5;
+	border-bottom:1px solid #7BAEB5;
+	padding:10px;
+	width:600px;
+}
+ul{
+	width:700px;
+}
+ul li{
+	float:left;
+	list-style-type:none;
+}
+ul li img{
+	border:0;
+	margin:10px;
+}
+div#glayLayer{
+	display:none;
+	position:fixed;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+	background:black;
+	filter:alpha(opacity=60);
+	opacity: 0.60;
+}
+* html div#glayLayer{
+	position:absolute;
+}
+#overLayer{
+	display:none;
+	position: fixed;
+	top:50%;
+	left:50%;
+	margin-top:-244px;
+	margin-left:-325px;
+}
+* html #overLayer{
+	position: absolute;
+}
+		</style>
+	</head>
+	<body>
+		<h1>jQuery 를 이용한 모달윈도우의 작성</h1>
+		<ul>
+			<li><a href="images/photo1.jpg" class="modal"><img src="images/photo1_thum.jpg" alt="샹드리아"  /></a></li>
+			<li><a href="images/photo2.jpg" class="modal"><img src="images/photo2_thum.jpg" alt="장미" /></a></li>
+			<li><a href="images/photo3.jpg" class="modal"><img src="images/photo3_thum.jpg" alt="바다" /></a></li>
+			<li><a href="images/photo4.jpg" class="modal"><img src="images/photo4_thum.jpg" alt="문" /></a></li>
+			<li><a href="images/photo5.jpg" class="modal"><img src="images/photo5_thum.jpg" alt="바다" /></a></li>
+			<li><a href="images/photo6.jpg" class="modal"><img src="images/photo6_thum.jpg" alt="꽃" /></a></li>
+			<li><a href="images/photo7.jpg" class="modal"><img src="images/photo7_thum.jpg" alt="하늘" /></a></li>
+			<li><a href="images/photo8.jpg" class="modal"><img src="images/photo8_thum.jpg" alt="건물" /></a></li>
+		</ul>
+		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	</body>
+</html>
