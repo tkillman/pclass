@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script>
+        function OnButtonDown(button) {
+
+                        button.style.color = "#ff0000";
+						var result= document.getElementById("result");
+						
+						result.innerHTML = "빨";
+						
+        }
+        function OnButtonUp(button) {
+            button.style.color = "#000000";
+            var result= document.getElementById("result");
+			
+			result.innerHTML = "검";
+            
+            
+        }
+    </script>
+</head>
+
+<body>
+    <button onmousedown="OnButtonDown (this)" onmouseup="OnButtonUp (this)">눌러보세요!</button>
+    <div id="result"></div>
+</body>

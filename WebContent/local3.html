@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <SCRIPT>  
+  
+  var scope = "global";
+ 
+  
+  function f(){
+	
+	  
+	 alert("아마 global : "+scope);
+	//undefiend가 뜬다. why? 지역변수가 나중에 선언되었더라도 지역변수로 인정된다.
+	 
+	 
+	var scope="local";
+	
+	alert("아마 local : " +scope);
+  
+  }
+ 
+  
+  f();
+  
+ </script>
+ 
+ </head>
+
+ <body>
+  
+ </body>
+</html>

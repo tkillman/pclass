@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script>
+function closeWin(){
+	
+	opener.document.getElementById("result").innerHTML = document.getElementById('text1').value;
+	
+	close();
+	
+}
+
+</script>
+
+</head>
+
+
+<body>
+
+<form action="bom_open.html" method="get">
+
+<input type="text" name="text1" id="text1">
+<input type="submit" value="제출" onclick="closeWin();">
+
+</form>
+</body>
+</html>

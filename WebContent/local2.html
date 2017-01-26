@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <SCRIPT>
+ 
+  var scope = "global";
+  
+  
+  function checkscope(){
+	scope="local";
+	document.write("아마 local :"+scope);
+	
+	myscope="mylocal";
+	
+	document.write("아마 mylocal : "+myscope);
+  }
+ 
+  checkscope();
+ 
+  document.write("아마 local : "+scope);
+  
+  document.write("아마 mylocal : "+myscope);
+ 
+  </SCRIPT>
+ </head>
+
+ <body>
+  
+ </body>
+</html>

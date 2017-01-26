@@ -1,0 +1,35 @@
+<div id='clock'></div>
+
+
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript"></script>
+    
+    
+
+<script>
+
+
+    function setClock() {
+      
+    	var now = new Date();
+        var s = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+        document.getElementById('clock').innerHTML = s;
+    
+        setTimeout('setClock()', 1000);
+
+    }
+    
+    setClock();
+	
+   
+    
+    var url = "NewFile.jsp";
+   
+    
+    setTimeout('$.get(url,{},function(data){alert(data)})',1000)
+    
+    
+    
+    
+</script>

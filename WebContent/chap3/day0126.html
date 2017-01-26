@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+function beforeSubmit(){
+	return confirm("정말 보낼까요?");
+}
+
+</script>
+
+
+<form name="myForm" onsubmit="return beforeSubmit();" action="save.jsp">
+이름 :<input type="text" name="irum"><br>
+<input type="submit" value="제출"> 
+
+
+
+</form>
+
+
+
+
+
+</body>
+</html>

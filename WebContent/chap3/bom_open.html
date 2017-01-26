@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+var win;
+
+
+function openWin(){
+
+	win=open('NewFile.html', '_blank', 'width=300, height=300', true);
+	
+}
+
+
+function closeWin(){
+	
+	win.close();
+	
+}
+
+
+
+
+</script>
+
+
+</head>
+<body>
+    
+    <form>
+       
+        <input type="button" value="구글창 열기" 
+	onclick="openWin()">
+	
+	<input type="button" value="구글창 닫기" onclick="closeWin();">
+	</form>
+	
+<div id="result"></div>	
+	
+</body>
+</html>

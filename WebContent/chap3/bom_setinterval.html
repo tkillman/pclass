@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script>
+        
+    	var id;
+    	var start=true;
+        
+        function changeColor() {
+           
+        	id = setInterval(flashText, 500);
+           
+        
+        }
+
+
+        function flashText() {
+            var elem = document.getElementById("target");
+            
+            elem.style.color = (elem.style.color == "red") ? "blue" : "red";
+            
+            elem.style.backgroundColor = 
+				(elem.style.backgroundColor == "green") ? "yellow" : "green";
+
+        }
+       
+        
+        function stopTextColor() {
+            
+        	
+        	if(start){
+        	
+        	clearInterval(id);
+            document.getElementById("btn").innerHTML ="실행";
+            start=false;
+        	
+        	} else{
+        		
+        		start=true;
+        		document.getElementById("btn").innerHTML ="중지";
+        		id = setInterval(flashText, 500);
+        		
+        	}
+            
+        }
+        
+        
+    </script>
+</head>
+
+<body onload="changeColor();">
+    <div id="target">
+        <p>This is a Text.</p>
+    </div>
+    
+    <button id="btn" onclick="stopTextColor();">중지</button>
+</body>
+</html>

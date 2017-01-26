@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <SCRIPT>
+  var scope = "global";
+ 
+  function checkscope(){
+	var scope="local";
+	
+	function nested(){
+		
+		var scope = "nest";
+		 document.write("2.아마 nest : " +scope+"<br>");
+	}
+	
+	document.write("1.아마 local : " +scope+"<br>");
+	nested();
+  }
+  
+  checkscope();
+ 	nested();
+
+  document.write("4.아마 global : " + scope);
+ 
+  </script>
+ </head>
+ <body></body></html>
