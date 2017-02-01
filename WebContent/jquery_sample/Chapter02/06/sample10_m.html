@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<style>
+
+div{
+
+width:400px;
+overflow: hidden;
+
+}
+
+p{
+
+width:1600px;
+
+}
+
+img{
+	
+	width:400px;
+
+}
+
+</style>
+
+<script>
+
+
+$(function(){
+	
+	$("img[src='flower.jpg']").click(function(){
+		
+		$(this).animate({
+			marginLeft:"-1200px"},"slow","linear"
+			
+		)
+	})
+	
+	$("img[src='Jellyfish.jpg']").click(function(){
+		
+		$("img[src='flower.jpg']").animate({
+			marginLeft:"0px"},"slow","linear"
+			
+		)
+	})
+	
+})
+
+</script>
+
+</head>
+
+
+
+<body>
+
+<div><p><img src="flower.jpg"><img src="building.jpg"><img src="sea.jpg"><img src="Jellyfish.jpg"></p></div>
+
+</body>
+</html>

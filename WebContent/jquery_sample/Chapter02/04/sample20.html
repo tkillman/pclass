@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample20</title>
@@ -6,16 +6,19 @@
 		<script>
 $(function(){
 	$("label,:checkbox").click(function(){
+		
 		$("label").css("background","");
+		
 		$(":checked").each(function(){
 			$("label[for='"+$(this).attr("id")+"']").css("background","#CCC");
+			
 		});
 	});
 });
 		</script>
 	</head>
 	<body>
-		스킬:
+		��ų:
 		<input type="checkbox" name="xhtml" value="XHTML" id="xhtml" />
 		<label for="xhtml">XHTML</label>
 		<input type="checkbox" name="css" value="CSS" id="css" />

@@ -1,27 +1,34 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample12</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
+	
 	$(":radio").click(function(){
+		
 		$("label").css("font-weight","");
 		$("label[for='"+$(this).attr("id")+"']").css("font-weight","bold");
+		
 	});
+	
+	
 	$("label").click(function(){
+		
 		$("label").css("font-weight","");
 		$(this).css("font-weight","bold");
+		
 	});
 });
 		</script>
 	</head>
 	<body>
-		ì„±ë³„:
-		<input type="radio" name="gender" value="ë‚¨ì" id="gender_man" />
-		<label for="gender_man">ë‚¨ì</label>
-		<input type="radio" name="gender" value="ì—¬ì" id="gender_woman" />
-		<label for="gender_woman">ì—¬ì</label>
+		¼ºº°:
+		<input type="radio" name="gender" value="³²ÀÚ" id="gender_man" />
+		<label for="gender_man">³²ÀÚ</label>
+		<input type="radio" name="gender" value="¿©ÀÚ" id="gender_woman" />
+		<label for="gender_woman">¿©ÀÚ</label>
 
 	</body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+$(function(){
+	
+	$(':radio').change(function(){
+		
+		$("label").css("color","black");
+	
+		$("label[for='"+$(this).attr('id')+"']").css("font-weight","bold");
+		
+	})
+})
+
+
+
+</script>
+</head>
+
+<body>
+
+<input type="radio" name="gender" value="남자" id="gender_man"><label for="gender_man">남자</label>
+<input type="radio" name="gender" value="여자" id="gender_woman"><label for="gender_woman">여자</label>
+
+
+</body>
+</html>

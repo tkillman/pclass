@@ -43,9 +43,40 @@ $(function(){
 	
 	//not 사용
 	
-	$("li:only-child").css("color","red");
+	//$("li:only-child").css("color","red");
 	
+	//속성
+	//$("[id]").css("color","green");
 	
+	//특정 속성
+	//$("[id='li3']").css("color","green");
+	
+	//속성 여러개 , 아이디를 가지고 있고 class 이름이 liClass4인 것
+	//$("[id][class='liClass4']").css("color","yellow");
+	
+	//첫번째 태그 찾기
+	//$("li:first").css("color","red");
+	
+	//마지막 태그 찾기
+	//$("li:last").css("color","green");
+	
+	//짝수번째 , 0부터 시작
+	//$("li:even").css("color","gray");
+	
+	//원하는 번째
+	//$("li:eq(1)").css("color","red");
+	
+	//헤드 태그
+	//$(":header").css("color","red");
+	
+	//문자열을 가지고 있는
+	//$("li:contains('텍스트3')").css("color","yellow");
+	
+	//태그를 가지고 있는
+	//$("li:has('span')").css("color","yellow");
+	
+	//태그가 조상인 경우
+	$("li:parent").css("color","green");
 	
 	
 })
@@ -60,7 +91,8 @@ $(function(){
 <li id="li1" class="liClass">텍스트1</li>
 <li id="li2" class="liClass"><span>텍스트2</span><span>텍스트2</span><span>텍스트2</span></li>
 <li id="li3" class="liClass">텍스트3</li>
-<li id="li4" class="liClass"><span>텍스트4<span></li>
+<li id="li4" class="liClass4"><span>텍스트4<span></li>
+<h1>제목입니다.</h1>
 </ul>
 
 
@@ -70,6 +102,7 @@ $(function(){
 <li><span>텍스트2</span><span>텍스트2</span><span>텍스트2</span></li>
 <li>텍스트3</li>
 <li><span>텍스트4<span></li>
+<h6>제목입니다.</h6>
 </ul>
 
 

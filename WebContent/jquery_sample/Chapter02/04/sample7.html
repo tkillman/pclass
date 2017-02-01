@@ -1,46 +1,59 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample7 </title>
+	
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
-$(function(){
+
+	$(function(){
 	$("form").submit(function(){
 		if($("input[name='name']").val()==""){
-			$("input[name='name']").css("border","1px solid red").after("<span>ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”</span>");
+			
+			
+			if($("span").css("color")=="rgb(255, 0, 0)"){
+				return false;
+			}
+			
+			
+			$("input[name='name']").css("border","1px solid red").after("<span>ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä</span>");
 			$("span").css("color","red")
+			
+			console.log($("span").css("color"))
+		
 			return false;
 		}
 	});
 });
 		</script>
 	</head>
+	
 	<body>
 	<form action="check.html" method="post">
 		<dl>
-		<dt> ì´ë¦„<em>(í•„ìˆ˜)</em></dt>
+		<dt> ÀÌ¸§<em>(ÇÊ¼ö)</em></dt>
 		<dd><input type="text" name="name" /></dd>
 
-		<dt> ì„±ë³„</dt>
+		<dt> ¼ºº°</dt>
 		<dd>
-		<input type="radio" name="gender" value=" ë‚¨ì„±"id="gender_man" />
-		<label for="gender_man"> ë‚¨ì„±</label>
-		<input type="radio" name="gender" value=" ì—¬ì„±"id="gender_woman" />
-		<label for="gender_woman"> ì—¬ì„±</label>
+		<input type="radio" name="gender" value=" ³²¼º"id="gender_man" />
+		<label for="gender_man"> ³²¼º</label>
+		<input type="radio" name="gender" value=" ¿©¼º"id="gender_woman" />
+		<label for="gender_woman"> ¿©¼º</label>
 		</dd>
 	
-		<dt> ì—°ë ¹</dt>
+		<dt> ¿¬·É</dt>
 		<dd>
 		<select name="age">
-		<option> ì„ íƒí•´ì£¼ì„¸ìš”</option>
-		<option value="10ëŒ€">10ëŒ€</option>
-		<option value="20ëŒ€">20ëŒ€</option>
-		<option value="30ëŒ€">30ëŒ€</option>
-		<option value="40ëŒ€ì´ìƒ">40ëŒ€ì´ìƒ</option>
+		<option> ¼±ÅÃÇØÁÖ¼¼¿ä</option>
+		<option value="10´ë">10´ë</option>
+		<option value="20´ë">20´ë</option>
+		<option value="30´ë">30´ë</option>
+		<option value="40´ëÀÌ»ó">40´ëÀÌ»ó</option>
 		</select>
 		</dd>
 
-		<dt> ìŠ¤í‚¬</dt>
+		<dt> ½ºÅ³</dt>
 		<dd>
 		<input type="checkbox" name="xhtml" value="XHTML" id="xhtml" />
 		<label for="xhtml">XHTML</label>
@@ -52,11 +65,11 @@ $(function(){
 		<label for="php">PHP</label>
 		</dd>	
 
-		<dt> ì½”ë©˜íŠ¸</dt>
+		<dt> ÄÚ¸àÆ®</dt>
 		<dd>
 		<textarea name="comment"></textarea>
 		</dd>
-		<input type="submit" value=" ì „ì†¡" />
+		<input type="submit" value=" Àü¼Û" />
 		</dl>
 	</form>
 

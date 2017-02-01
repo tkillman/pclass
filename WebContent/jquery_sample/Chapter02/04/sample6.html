@@ -1,23 +1,27 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample6 </title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
+
 $(function(){
 	$("select").change(function(){
+		
 		$("span").text($(this).val());
+		
 	});
+	
 });
 		</script>
 	</head>
 	<body>
-		ì‹ ì²­ìï¼š
+		½ÅÃ»ÀÚ£º
 		<select>
-			<option value=" ì´ë¦„">ê°œì¸</option>
-			<option value=" íšŒì‚¬ëª…"> ë²•ì¸</option>
+			<option value=" ÀÌ¸§">°³ÀÎ</option>
+			<option value=" È¸»ç¸í"> ¹ıÀÎ</option>
 		</select>
-		<p><span>ì´ë¦„</span><input type="text" /></p>
+		<p><span>ÀÌ¸§</span><input type="text" /></p>
 
 	</body>
 </html>

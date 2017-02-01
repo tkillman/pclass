@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+
+$(function(){
+	
+	$("input").val("입력해주세요.").css("color","#FF0000").one("focus",function(){
+		
+		$(this).val("");
+		
+	}).blur(function(){
+		
+		if($(this).val()==""){
+			
+			$("input").val("입력해주세요.").css("color","#FF0000").one("focus",function(){
+				
+				$(this).val("");
+		})
+
+		}
+	});
+	
+	
+	
+	
+	$("#btn1").click(function(){
+		
+		$("#resultDiv").html($(":input").val() +"로 메일을 전송하겠습니다.")
+		$(":input").val("");
+		
+	})
+	
+	
+})
+</script>
+</head>
+<body>
+
+이메일 입력 : <input type="text"><br>
+<button id="btn1">전송</button>
+<div id="resultDiv"></div>
+
+</body>
+</html>

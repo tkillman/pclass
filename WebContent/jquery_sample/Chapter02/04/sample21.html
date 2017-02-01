@@ -1,14 +1,22 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample21</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
+	
 	$("select").change(function(){
-	if($(":selected").attr("value")=="10 ëŒ€"){
+		
+		
+	if($(":selected").attr("value")=="10 ´ë"){
+		
 		$("input").attr("disabled", "disabled");
-	}else{
+	
+	}else if($(":selected").attr("value")==" ¼±ÅÃÇØÁÖ¼¼¿ä"){
+		$("input").attr("disabled", "disabled");
+	} else{
+		
 		$("input").removeAttr("disabled");
 	}
 	});
@@ -16,15 +24,15 @@ $(function(){
 		</script>
 	</head>
 	<body>
-<p> ë‚˜ì´ï¼š
+<p> ³ªÀÌ£º
 <select name="age">
-<option value=" ì„ íƒí•´ì£¼ì„¸ìš”"> ì„ íƒí•´ì£¼ì„¸ìš”</option>
-<option value="10 ëŒ€">10 ëŒ€</option>
-<option value="20 ëŒ€">20 ëŒ€</option>
-<option value="30 ëŒ€">30 ëŒ€</option>
-<option value="40 ëŒ€ì´ìƒ">40 ëŒ€ì´ìƒ</option>
+<option value=" ¼±ÅÃÇØÁÖ¼¼¿ä"> ¼±ÅÃÇØÁÖ¼¼¿ä</option>
+<option value="10 ´ë">10 ´ë</option>
+<option value="20 ´ë">20 ´ë</option>
+<option value="30 ´ë">30 ´ë</option>
+<option value="40 ´ëÀÌ»ó">40 ´ëÀÌ»ó</option>
 </select></p>
-<p> ì¢‹ì•„í•˜ëŠ” ìˆ ï¼š<input type="text" /></p>
+<p> ÁÁ¾ÆÇÏ´Â ¼ú£º<input type="text" disabled="disabled"/></p>
 
 	</body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+
+$(function(){
+	
+	$("a").click(function(){
+		 
+		$("img").attr("src",$(this).attr('href')).attr("alt",$(this).text());
+		return false;
+		
+	 })
+	
+})
+</script>
+
+
+
+</head>
+<body>
+
+<a href="building.jpg">빌딩</a>
+<a href="sea.jpg">바다</a>
+<a href="Jellyfish.jpg">젤리피쉬</a>
+<a href="flower.jpg">꽃</a>
+<br>
+<img alt="꽃" src="flower.jpg"></img>
+
+
+</body>
+</html>

@@ -1,15 +1,16 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample5</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
-	$("input").val("ì…ë ¥í•´ ì£¼ì„¸ìš”").css("color","#CCC").one("focus",function(){
+	$("input").val("ÀÔ·ÂÇØ ÁÖ¼¼¿ä").css("color","#CCC").one("focus",function(){
 		$(this).val("").css("color","#000");
 	}).blur(function(){
+		
 		if($(this).val()==""){
-			$(this).val("ì…ë ¥í•´ ì£¼ì„¸ìš”").css("color","#CCC").one("focus",function(){
+			$(this).val("ÀÔ·ÂÇØ ÁÖ¼¼¿ä").css("color","#CCC").one("focus",function(){
 				$(this).val("").css("color","#000");
 			});
 		}
@@ -18,6 +19,6 @@ $(function(){
 		</script>
 	</head>
 	<body>
-		ì´ë¦„ï¼š<input type="text" value="" />
+		ÀÌ¸§£º<input type="text" value="" />
 	</body>
 </html>

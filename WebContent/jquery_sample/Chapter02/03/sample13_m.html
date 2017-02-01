@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+
+
+$(function(){
+	
+	$("a").click(function(){
+		$('img').attr("src",$(this).attr("href"));
+		return false;
+		
+	}); 
+	
+	$("#btn1").click(function(){
+		
+		$('ul').append("<a href='Jellyfish.jpg'>젤리피쉬</a>")
+		
+	})
+	
+	
+	/* $(document).on("click","a",function(){
+		
+		$('img').attr("src",$(this).attr("href"));
+		return false;
+		
+	}) 
+	 */
+	
+	$("#btn2").click(function(){
+		
+		$("a").unbind("click");
+		
+	})
+	 
+})
+
+
+</script>
+
+
+</head>
+<body>
+<ul>
+<a href="sea.jpg">바다</a>
+<a href="flower.jpg">꽃</a>
+</ul>
+<br>
+<img></img>
+<br>
+<button id="btn1">버튼1</button>
+<button id="btn2">버튼2</button>
+
+
+
+</body>
+</html>

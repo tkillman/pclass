@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
+	<style>
+	
+	img{
+	display:none;
+	}
+	
+	</style>
+	
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#btn1").click(function(){
+			
+			$("img").fadeIn("slow");
+		})
+		
+		$("#btn2").click(function(){
+			
+			$("img").fadeOut("slow");
+		})
+	})
+	
+	
+	</script>
+	
+</head>
+<body>
+
+
+<button id="btn1">버튼1</button>
+<button id="btn2">버튼2</button>
+
+<p><img src="flower.jpg"></img></p>
+
+
+</body>
+</html>

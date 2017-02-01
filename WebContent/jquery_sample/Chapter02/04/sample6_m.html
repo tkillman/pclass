@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>
+	
+	$(function(){
+		$("select").change(function(){
+			
+			$("span").html($(this).val()+" : ");
+			
+		})
+		
+	})
+	
+	</script>
+
+
+</head>
+<body>
+
+
+신청자 : <select><option value="이름"> 개인</option><option value="회사명"> 회사</option></select><br>
+<span>이름 :</span>  <input type="text">
+ 
+</body>
+</html>

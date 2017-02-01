@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample7 </title>
@@ -8,30 +8,38 @@ dl{
 	width:300px;
 	margin:50px auto;
 }
+
 dl dt{
 	background:#7CADB6;
 	cursor:pointer;
 }
+
 dl dd{
-	border:1px solid #7CADB6;
+
+	border:1px solid #FF0000;
 	height:250px;
 	margin:0;
 }
 
 		</style>
 		<script>
+		
+		
 $(function(){
 	$("dt").click(function(){
 		$("dd:not(:animated)").slideToggle("slow");
 	});
 });
+
 		</script>
 	</head>
 	<body>
 		<dl>
-			<dt>ìŠ¬ë¼ì´ë”© íš¨ê³¼ë¡œ í‘œì‹œìƒíƒœë¥¼ ë³€ê²½í•œë‹¤</dt>
-			<dd>slideDown()/slideUp()ëŠ” show()/hide() ì™€ëŠ” ë‹¤ë¥¸ ìŠ¬ë¼ì´ë”© ì• ë‹ˆë©”ì´ì…˜ íš¨ê³¼ë¡œ
-í‘œì‹œ/ë¹„í‘œì‹œë¥¼ ë³€ê²½í•˜ëŠ” ëª…ë ¹ì…ë‹ˆë‹¤.
+		
+			<dt>½½¶óÀÌµù È¿°ú·Î Ç¥½Ã»óÅÂ¸¦ º¯°æÇÑ´Ù</dt>
+			
+			<dd style="display:none;">slideDown()/slideUp()´Â show()/hide() ¿Í´Â ´Ù¸¥ ½½¶óÀÌµù ¾Ö´Ï¸ŞÀÌ¼Ç È¿°ú·Î
+			Ç¥½Ã/ºñÇ¥½Ã¸¦ º¯°æÇÏ´Â ¸í·ÉÀÔ´Ï´Ù.
 
 			</dd>
 		</dl>

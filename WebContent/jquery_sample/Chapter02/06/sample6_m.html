@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<style>
+
+dl{
+	width: 300px;
+	margin: 50px auto;
+}
+
+dl dd{
+
+	height: 500px;
+	border: 1px solid #FF0000;
+}
+
+</style>
+
+<script>
+$(function(){
+	
+	$('dt').click(function(){
+		
+		$('dd:not(:animated)').slideToggle("slow");
+		
+	})
+
+})
+
+</script>
+
+
+
+</head>
+<body>
+
+<dl>
+<dt>맨 윗칸</dt>
+<dd>보여줘야할 내용</dd>
+</dl>
+
+
+
+</body>
+</html>

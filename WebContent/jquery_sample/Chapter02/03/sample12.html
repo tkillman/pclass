@@ -1,18 +1,20 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample12</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
-	$("img").mousemove(function(e){
-		$("p").html("í˜„ìž¬ Xì¢Œí‘œï¼š"+e.clientX+"<br />í˜„ìž¬ Yì¢Œí‘œï¼š"+e.clientY);
+	
+	$(document).mousemove(function(e){
+		$("p").html("ÇöÀç XÁÂÇ¥£º"+e.clientX+"<br />ÇöÀç YÁÂÇ¥£º"+e.clientY);
 	});
+	
 });
 		</script>
 	</head>
 	<body>
-		<img src="flower.jpg" alt="ê½ƒ" />
+		<img src="flower.jpg" alt="²É" />
 		<p></p>
 	</body>
 </html>

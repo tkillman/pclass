@@ -1,13 +1,16 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample18</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
+		
+		
 $(function(){
+	
 	$(":button").click(function(){
 		if($("input[name='mail']").val() != $("input[name='check']").val()){
-			 $("em").text("ë©”ì¼ ì£¼ì†Œê°€ ë™ì¼í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			 $("em").text("¸ŞÀÏ ÁÖ¼Ò°¡ µ¿ÀÏÇÏÁö ¾Ê½À´Ï´Ù.");
 			return false;
 		}
 	});
@@ -18,13 +21,15 @@ $(function(){
 	<body>
 	<form action="check.html">
 	<dl>
-	<dt>ë©”ì¼ì£¼ì†Œ</dt>
+	<dt>¸ŞÀÏÁÖ¼Ò</dt>
 	<dd><input type="text" name="mail" /></dd>
-	<dt>ë©”ì¼ì£¼ì†Œ<em>(í™•ì¸)</em></dt>
+	<dt>¸ŞÀÏÁÖ¼Ò<em>(È®ÀÎ)</em></dt>
 	<dd><input type="text" name="check" /></dd>
-	<dd><button> í™•ì¸</button></dd>
+	<dd><button> È®ÀÎ</button></dd>
 	</dl>
 	</form>
 
 	</body>
+	
+	
 </html>

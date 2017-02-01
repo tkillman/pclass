@@ -1,27 +1,34 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample8</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
+	
 	$("a").dblclick(function(){
+		
 		$("img").attr("src",$(this).attr("href")).attr("alt",$(this).text());
+		
 	}).click(function(){
+		
 		return false;
+		
 	});
+	
 });
+
 		</script>
 	</head>
 	<body>
 	<ul>
-	<li><a href="flower.jpg">ê½ƒ</a></li>
-		<li><a href="sea.jpg">ë°”ë‹¤</a></li>
-		<li><a href="Jellyfish.jpg">í•´íŒŒë¦¬</a></li>
-		<li><a href="Building.jpg">ê±´ë¬¼</a></li>
+	<li><a href="flower.jpg">²É</a></li>
+		<li><a href="sea.jpg">¹Ù´Ù</a></li>
+		<li><a href="Jellyfish.jpg">ÇØÆÄ¸®</a></li>
+		<li><a href="building.jpg">°Ç¹°</a></li>
 		
 	</ul>
-	<p><img src="flower.jpg" alt="ê½ƒ" /></p>
+	<p><img src="flower.jpg" alt="²É" /></p>
 	
 	</body>
 </html>

@@ -1,22 +1,29 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 	<title>sample4</title>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 $(function(){
+	
+	
 	$("a").click(function(){
-		$("img").attr("src","sea.jpg").attr("alt","ë°”ë‹¤");
+		
+		$("img").attr("src","sea.jpg").attr("alt","¹Ù´Ù");
+		
+		//return false ½ÃÅ°¸é ¿ø·¡ ÀÖ´ø a ÅÂ±×¿¡ javascript ¼öÇàÀº »ç¶óÁø´Ù.
 		return false;
+		
+		
 	});
 });
 		</script>
 	</head>
 	<body>
 	
-	<a href="sea.jpg">í™”ë©´ì„ ë³€ê²½</a>
+	<a href="sea.jpg">È­¸éÀ» º¯°æ</a>
 
-	<p><img src="flower.jpg" alt="ê½ƒ" /></p>
+	<p><img src="flower.jpg" alt="²É" /></p>
 	
 	</body>
 </html>
