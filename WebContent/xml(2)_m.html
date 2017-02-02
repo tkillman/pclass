@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script>
+
+$(function(){
+	
+	$.ajax({
+		
+		type:"get"
+		,url:"ajax/xml/04.xml"
+		,dataType:"xml"
+		,success:function(xml){
+			console.log(xml);
+			
+			
+			$(xml).find("subject").each(function(){
+				
+				var data = $(this).text();
+				
+				var p=$("<p>").html(data);
+				
+				$("#result").append(p);
+				
+			})
+			
+		}
+		
+		
+		
+	})
+	
+	
+	
+	
+})
+
+
+
+
+
+</script>
+
+</head>
+<body>
+
+
+
+<div id="result"></div>
+</body>
+</html>

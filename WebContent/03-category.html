@@ -25,10 +25,13 @@
     
     
      $(function() {
+    	 
         // 기본적으로 1depth의 드롭다운을 로드함
         $("#category1").load("ajax/text/category-data.html #category1-1", function() {
           // 로딩이 완료되면 드롭다운을 감싸는 태그 요소를 화면에 표시함
+        
           $(this).show();
+          
         });
 
         
@@ -58,11 +61,17 @@
 
           
           // 선택된 항목이 지시하는 하위 카테고리 페이지의 URL얻기
+          
           var target = $(this).find("option:selected").attr("data-target");
           var selector = "ajax/text/category-data.html " + target;
+          
+          
           $("#category3").load(selector, function() {
-            $(this).show();
+          
+        	  $(this).show();
+          
           });
+          
         });
 
         
@@ -78,7 +87,9 @@
             // class속성이 "console"인 요소에게 출력
          
             $(".console").html(data1 + " &gt; " + data2 + " &gt; " + data3);
+          
           }
+          
         });
       });
      
@@ -89,6 +100,8 @@
   </head>
   
   <body>
+  
+  
     <h1 class="title">동적 드롭다운</h1>
     <div class="exec">
     
@@ -102,6 +115,8 @@
     </div>
     <!-- 최종 선택 결과를 표시할 곳 -->
     <div class="console"></div>
+    
+    
   </body>
 </html>
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script>
+
+$(function(){
+	
+	
+	$.ajax({
+		
+		type:"get"
+		,url:"ajax/xml/03.xml"
+		,dataType:"xml"
+		,success:function(xml){
+			
+			console.log(xml);
+		
+			var data1 = $(xml).find("teacher").text();
+			
+			console.log(data1);
+			
+			$("#result").html(data1);
+			
+		}
+		
+	})
+	
+})
+
+
+
+</script>
+</head>
+
+
+
+
+<body>
+
+<div id="result"></div>
+
+
+</body>
+</html>

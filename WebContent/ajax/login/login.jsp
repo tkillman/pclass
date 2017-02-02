@@ -14,6 +14,7 @@
 	
 	// 아이디: jquery, 비밀번호: 123qwe 로 설정된 경우 로그인 허용이라고 가정
 	// 결과를 얻어내기 위해서 JSP의 DB연동 처리가 필요합니다.
+	
 	boolean result = true;
 	String message = "안녕하세요. " + user_name + "님!!!";
 	

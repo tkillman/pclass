@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
+    <meta charset="UTF-8">
         <title>login</title>
 
         <style type="text/css">
@@ -105,6 +106,7 @@
                 // 폼에 대한 submit 이벤트 처리 --> 입력값 여부 검사를 수행한다.
                 $("#login").bind("submit", function() {
                     /** 입력여부 검사 */
+                   
                     if (!$("#user_name").val()) {
                         alert("아이디를 입력하세요.");
                         $("#user_name").focus();
@@ -121,7 +123,7 @@
                     $("#login .loader").show();
 
                     /** 로그인 성공 가정한 XML파일 */
-                    var url = "ajax/login/login_ok.xml";
+                   // var url = "ajax/login/login_ok.xml";
                     /** 로그인 실패(아이디오류)를 가정한 XML파일 */
                     //var url = "ajax/login/login_id.xml";
                     /** 로그인 실패(비밀번호 오류)를 가정한 XML파일 */
@@ -129,8 +131,11 @@
                     /** 로그인처리에 대한 PHP예시 */
                     //var url = "ajax/login/login.php";
                     /** 로그인처리에 대한 JSP예시 */
-                    //var url = "ajax/login/login.jsp";
-
+                    var url = "ajax/login/login.jsp";
+					
+                    var se = $(this).serialize();
+					console.log(se);
+					
                     /*** ajax 로그인처리 ***/
                     var ajax = $.post(url, $(this).serialize(), function(data) {
                         // XML에서 result태그와 message태그의 내용 추출
@@ -160,6 +165,7 @@
             });
         </script>
     </head>
+  
     <body>
         <form id="login">
             <fieldset>

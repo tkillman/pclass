@@ -13,10 +13,13 @@
 
 		<!-- 사용자 스크립트 블록 -->
 		<script type="text/javascript">
+		
+		
+		var url="ajax/text/02.txt";
 			$(function() {
 				$("#mybtn").click(function() {
 					$.ajax({
-						url : "ajax/text/02.txt",
+						url : url,
 						type : "get",
 						dataType : "text",
 						timeout : 30000,

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script>
+
+
+$(function(){
+	
+	$("#category1").load("ajax/text/category-data.html #category1-1");
+	
+	
+	$(document).on("change","#category1 > select",function(){
+		
+		$("#category2").empty().hide();
+		$("#category3").empty().hide();
+		
+		
+		var target = $(this).find(":selected").attr("data-target");
+		var selector = "ajax/text/category-data.html " + target;
+		console.log(selector)
+		
+		$("#category2").load(selector,function(){
+			
+			$(this).show();
+			
+		});
+		
+		
+	})
+	
+	
+	$(document).on("change","#category2 > select",function(){
+		
+		$("#category3").empty().hide();
+		
+		var target = $(this).find(":selected").attr("data-target");
+		var selector = "ajax/text/category-data.html " + target;
+		console.log(selector)
+		
+		
+		$("#category3").load(selector,function(){
+			
+			$(this).show();
+			
+		});
+		
+		
+		
+	})
+	
+	$(document).on("change","#category3 > select",function(){
+		
+		if($(this).find(":selected").index()>0){
+			
+			console.log($(this).find(":selected").index())
+			
+			
+			var data1 = $("#category1 > select > :selected").val();
+			console.log(data1)
+			var data2 = $("#category2 > select > :selected").val();
+			var data3 = $("#category3 > select > :selected").val();
+			
+			
+			
+			$("#div1").html("data1은 " +data1 + " data2은 " +data2 + " data3은 " +data3)
+			
+		}
+		
+		
+	})
+	
+	
+})
+
+
+
+</script>
+</head>
+<body>
+
+<span id="category1"></span>
+<span id="category2"></span>
+<span id="category3"></span>
+
+<div id="div1"></div>
+
+</body>
+</html>

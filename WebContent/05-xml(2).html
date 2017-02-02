@@ -17,14 +17,15 @@
 			$(function() {
 				$("#mybtn").click(function() {
 					$.ajax({
-						url: "ajax/xml/04.xml",
-						//url: "ajax/xml/xmldata.jsp",						
+						//url: "ajax/xml/04.xml",
+						url: "ajax/xml/xmldata.jsp",						
 						type: "get",
-						data: "keyword=web",
+						data: "keyword=app",
 						dataType: "xml",
 						cache: false,
 						timeout: 30000,
 						success: function(xml) {
+							
 							// 반복되는 태그 단위를 찾아서 each() 함수 사용
 							$(xml).find("subject").each(function() {
 								// 각 개별 요소에 속해 있는 텍스트 데이터 추출
@@ -53,6 +54,7 @@
 		</script>
 
 	</head>
+	
 	<body>
 		<h1 class="title">$.ajax() 함수를 사용한 XML데이터 읽기 (2)</h1>
 		<div class="exec">
@@ -60,4 +62,5 @@
 		</div>
 		<div class="console" id="result"></div>
 	</body>
+	
 </html>
