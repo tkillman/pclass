@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="java.util.Map" %>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head><title>요청 파라미터 출력</title></head>
@@ -32,7 +32,8 @@ address 파라미터 = <%= request.getParameter("address") %>
 <b>request.getParameterValues() 메서드 사용</b><br>
 <%
 	String[] values = request.getParameterValues("pet");
-	if (values != null) {
+	
+if (values != null) {
 	for (int i = 0 ; i < values.length ; i++) {
 %>
 	<%= values[i] %>
@@ -40,10 +41,12 @@ address 파라미터 = <%= request.getParameter("address") %>
 		}
 	}
 %>
+
 <p>
 <b>request.getParameterNames() 메서드 사용</b><br>
 <%
 	Enumeration paramEnum = request.getParameterNames();
+	
 	while(paramEnum.hasMoreElements()) {
 		String name = (String)paramEnum.nextElement();
 %>
@@ -51,6 +54,7 @@ address 파라미터 = <%= request.getParameter("address") %>
 <%
 	}
 %>
+
 <p>
 <b>request.getParameterMap() 메서드 사용</b><br>
 <%

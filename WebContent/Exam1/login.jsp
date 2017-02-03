@@ -1,8 +1,22 @@
+<%@page import="javax.xml.ws.Dispatch"%>
 <%@ page contentType="text/html; charset=utf-8" %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("memberId");
+	String name = request.getParameter("name");
+
 	if (id != null && id.equals("abc")) {
-		response.sendRedirect("./index.jsp");
+		
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		
+		request.setAttribute("name", name);
+		
+		rd.forward(request, response);
+				
+	
+		
 	} else {
 %>
 <html>
@@ -11,6 +25,4 @@
 잘못된 아이디입니다.
 </body>
 </html>
-<%
-	}
-%>
+<% } %>

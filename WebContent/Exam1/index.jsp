@@ -5,6 +5,12 @@
 3장의 인덱스 페이지
 <br>
 <br>
+
+
+
+<%request.setCharacterEncoding("UTF-8"); %>
 <%= request.getParameter("name") %>
+<%= request.getParameter("memberId") %>
+
 </body>
 </html>
