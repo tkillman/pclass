@@ -1,9 +1,10 @@
 
+<%@page import="java.util.Enumeration"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Map"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" autoFlush="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +21,18 @@
 
 request.setCharacterEncoding("UTF-8");
 
+Enumeration<String> names = request.getParameterNames();
+
+while(names.hasMoreElements()){
+	
+	
+	
+	
+	
+}
 
 
+/* 
 Map<String,String[]> map= request.getParameterMap();
 
 Set<String> keySet=  map.keySet();
@@ -43,6 +54,7 @@ while(KeyIterator.hasNext()){
 	}
 	
 }
+*/
 
 %>
 

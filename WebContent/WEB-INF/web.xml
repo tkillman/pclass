@@ -11,6 +11,20 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  
+  <context-param>
+  <description>초기화파라미터</description>
+  <param-name>이름</param-name>
+  <param-value>값</param-value>
+  </context-param>
+  
+  
+  <context-param>
+  <param-name>checkLevel</param-name>
+  <param-value>5</param-value>
+  </context-param>
+  
+  
   <!-- <servlet>
   <servlet-name>NowServlet</servlet-name>
   <servlet-class>day01.NowServlet</servlet-class>
@@ -22,4 +36,8 @@
   <url-pattern>/Now</url-pattern>
   </servlet-mapping>
    -->
+   
+   
+   
+   
 </web-app>

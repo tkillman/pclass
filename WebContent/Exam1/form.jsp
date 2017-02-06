@@ -18,6 +18,8 @@
 <a href="viewParameter.jsp
 ?name=test&address=서울&pet=dog&pet=cat">
 파라미터 보기
+
+
 </a>
 </body>
 </html>
