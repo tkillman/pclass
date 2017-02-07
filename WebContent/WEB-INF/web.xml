@@ -37,6 +37,26 @@
   </servlet-mapping>
    -->
    
+   <error-page>
+   <error-code>404</error-code>
+   <location>/Exam4/error/error404.jsp</location>
+   </error-page>
+   
+
+   <error-page>
+   <exception-type>java.lang.NullPointerException</exception-type>
+   <location>/Exam4/error/errorNullPointer.jsp</location>
+   </error-page>
+
+   <jsp-config>
+   <jsp-property-group>
+   <url-pattern>/Exam3/view/*</url-pattern>
+   <include-prelude>/Exam3/common/variable.jspf</include-prelude>
+   <include-coda>/Exam3/common/footer.jspf</include-coda>
+   </jsp-property-group>
+   </jsp-config>
+   
+   
    
    
    
