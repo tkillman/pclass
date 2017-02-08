@@ -37,7 +37,7 @@
   </servlet-mapping>
    -->
    
-   <error-page>
+   <!-- <error-page>
    <error-code>404</error-code>
    <location>/Exam4/error/error404.jsp</location>
    </error-page>
@@ -46,7 +46,17 @@
    <error-page>
    <exception-type>java.lang.NullPointerException</exception-type>
    <location>/Exam4/error/errorNullPointer.jsp</location>
-   </error-page>
+   </error-page> -->
+
+<session-config>
+<session-timeout>
+30
+</session-timeout>
+
+
+</session-config>
+
+
 
    <jsp-config>
    <jsp-property-group>
