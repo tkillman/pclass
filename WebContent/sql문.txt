@@ -1,0 +1,197 @@
+>cmd
+sqlplus 계정명/계정비번
+
+ex))  sqlplus system/oracle
+
+sqlplus / as sysdba
+
+계정생성방법
+ create user 계정명 identified by 비밀번호;
+
+계정권한부여
+ grant resource, connect to 계정명;
+
+'sid'확인(system계정에서만 가능)
+ select instance from v$thread;
+
+'port'확인
+ select dbms_xdb.getHttpport() from dual;
+
+'port'변경
+ exec dbms_xdb.setHttpport(원하는 port번호);
+
+테이블 생성
+create table 테이블name(
+//컬럼 생성
+컬럼명 데이터타입 속성,
+
+);
+
+데이터 타입
+ 문자 : varchar2(n) n : 0 ~ 4000
+ 숫자 : number  
+ 날짜 : date
+
+create table mem(
+id  varchar2(20) not null primary key,
+pwd varchar2(20) not null,
+age number
+);
+
+
+not null:null값 X.
+
+desc 테이블명;
+
+데이터 삽입
+ insert into 테이블명 values(저장할 값);
+> insert into MEM values('java','java1',10);
+
+특정 컬럼에만 저장하고 싶을 때
+insert into 테이블명 (넣고싶은 컬럼명) 
+values (값); 
+
+-->'(넣고싶은 컬럼명)'순서에 맞게 넣어야 함
+
+수정
+
+update 테이블명 set 수정할 컬럼명 = '값';
+
+update su set age = 100;
+
+update 테이블명 set 수정할 컬럼명 = '값'
+where 컬럼명 = '값';
+
+update MEM set age = 100 where id = 'java';
+
+삭제 (레코드 전부 삭제)
+delete from 테이블명;
+
+특정 레코드만 삭제
+delete from 테이블명 where 컬럼명 = 값;
+
+delete from MEM where id = 'a';
+
+
+where절 연산자
+ = 같음
+<> 같지 않음
+!= 같지 않음
+ < 보다 작음
+<= 보다 작거나 같음
+!< 작지 않음
+ > 보다 큼
+>= 크거나 같음
+!> 크지 않음
+
+BETWEEN  지정된 두 값 사이에 있음
+IS NULL  null값임
+
+테이블 내 모든 레코드 검색
+select * from 테이블명;
+
+계정의 모든 테이블 검색 
+select * from tab;
+
+특정 레코드만 검색
+select * from 테이블명 where 컬럼 = 값;
+
+select * from MEM where age BETWEEN 20 AND 50;
+
+특정 컬럼만 검색
+select 컬럼명,.. from 테이블명;
+
+select id, age from MEM;
+
+특정 레코드의 특정 컬럼만 검색
+ 
+select 컬럼명 from MEM where 컬럼 = 값;
+
+select pwd from MEM where id='java';
+
+
+별칭검색:검색할 때만 컬럼의 이름을 바꿔서 검색
+ 
+select 컬럼명 (as) 별칭, 컬럼명 as 별칭 ... from 테이블명;
+
+select id as 아이디, pwd as 비번 from mem;
+
+
+연산검색(컬럼 속성이 number인 경우)
+ 
+select 컬럼명 연산기호(+,-,*,/) 숫자 from 테이블명;
+
+
+검색정렬
+ 
+select * from 테이블명 order by 컬럼 (asc);
+-->오름차순
+ 
+select * from 테이블명 order by 컬럼 desc;
+-->내림차순
+
+AVG() 평균값
+COUNT() 레코드 개수
+MAX() 최대값
+MIN() 최소값 
+SUM() 합계
+
+테이블 레코드 (전체 수)검색
+ 
+select count(*) from 테이블 명;
+ -->int 타입의 결과로 나온다.
+
+최대/최소값 검색
+ 
+select max(컬럼) from 테이블명; 
+select min(컬럼) from 테이블명;
+ 
+AND
+OR
+IN
+NOT
+
+select * from 테이블명 where 컬럼 IN (값,값...); 
+select * from 테이블명 where NOT 컬럼 = 값; 
+
+
+와일드 카드
+LIKE %
+select * from 테이블명 where 컬럼 like '%값의 일부분%';
+
+select * from mem where  id like '%j%';
+
+j%
+%j
+%j%
+
+
+sysdate : oracle에서 현재날짜 구하기
+
+
+
+컬럼추가(alter-add)
+alter table 테이블명 add(추가할 컬럼명과 타입);
+☆레코드가 하나라도 있으면 not null을 쓸 수 없다. 
+ 
+컬럼명 수정(alter-rename) 
+alter table 테이블명 rename column 컬럼명 
+to 수정할 이름;
+
+컬럼데이터 타입 수정 (alter-modify)
+ alter table 테이블명 modify (컬럼명 타입);
+ 
+컬럼 삭제(alter-drop) 
+alter table 테이블명 drop column 컬럼명;
+  
+커밋 
+commit
+
+테이블 삭제 
+drop table 테이블명;
+ 
+
+
+
+
+

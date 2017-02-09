@@ -1,0 +1,19 @@
+create table ITEM ( 
+ITEM_ID int not null, 
+NAME varchar2(100) , 
+constraint ITEM_PK primary key (ITEM_ID) 
+);
+
+
+create table ITEM_DETAIL ( 
+ITEM_ID int not null, 
+DETAIL varchar2(200) , 
+constraint ITEM_DETAIL_PK primary key(ITEM_ID), 
+constraint ITEM_DETAIL_FK foreign key (ITEM_ID) references ITEM(ITEM_ID) 
+);
+
+
+https://mvnrepository.com/
+
+
+

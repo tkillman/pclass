@@ -25,6 +25,14 @@
   </context-param>
   
   
+  <!-- load-on-startup의 뜻은 서버가 시작할 때 1번 실행해라. -->
+  
+  <servlet>
+  <servlet-name>DBCPInit</servlet-name>
+  <servlet-class>jdbc.DBCPInit</servlet-class>
+  <load-on-startup>1</load-on-startup>
+  </servlet>
+  
   <!-- <servlet>
   <servlet-name>NowServlet</servlet-name>
   <servlet-class>day01.NowServlet</servlet-class>
