@@ -8,36 +8,40 @@
    
     function checkIt() {
         var userinput = eval("document.userinput");
+        //console.log(userinput.con.value);
+        
         if(!userinput.id.value) {
             alert("ID를 입력하세요");
             return false;
         }
-       
+
+        if(userinput.con.value=="no") {
+            alert("아이디 중복 체크를 해주세요");
+           // console.log(userinput.con.value);
+            return false;
+        }
+        
         if(!userinput.passwd.value ) {
             alert("비밀번호를 입력하세요");
             return false;
         }
+        
         if(userinput.passwd.value != userinput.passwd2.value)
         {
             alert("비밀번호를 동일하게 입력하세요");
             return false;
         }
       
-        if(!userinput.username.value) {
+        if(!userinput.name.value) {
             alert("사용자 이름을 입력하세요");
             return false;
         }
+     
         if(!userinput.jumin1.value  || !userinput.jumin2.value )
         {
             alert("주민등록번호를 입력하세요");
             return false;
         }
-        
-        if(!userinput.confirm_id_boolean.value){
-        	alert("아이디 중복체크를 해주세요.")
-        	return false;
-        }
-        
         
     }
 
@@ -81,7 +85,7 @@ window.open(url,"post","toolbar=no ,width=500 ,height=300 ,directories=no,status
       <td width="400">
         <input type="text" name="id" size="10" maxlength="12">
         <input type="button" name="confirm_id" value="ID중복확인" OnClick="openConfirmid(this.form)">
-        <input type="hidden" name="confirm_id_boolean" value="false">
+        <input type="hidden" name="con" value="no">
       </td>
     </tr>
     <tr>

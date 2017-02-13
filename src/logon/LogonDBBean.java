@@ -43,6 +43,7 @@ private static LogonDBBean instance = new LogonDBBean();
             pstmt.executeUpdate();
         } catch(Exception ex) {
             ex.printStackTrace();
+            
         } finally {
             if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
             if (conn != null) try { conn.close(); } catch(SQLException ex) {}

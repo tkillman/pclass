@@ -58,7 +58,7 @@ LogonDBBean manager = LogonDBBean.getInstance();
   function setid()
     {
     opener.document.userinput.id.value="<%=id%>";//opener:새로운 창을 연다.
-    opener.document.userinput.confirm_id_boolean.value="true";
+    opener.document.userinput.con.value="ok";
 self.close();
 }
 
