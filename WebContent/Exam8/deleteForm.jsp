@@ -5,6 +5,7 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 
    <script>
+   
        function begin(){
          document.myform.passwd.focus();
        }

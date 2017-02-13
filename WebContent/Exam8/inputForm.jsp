@@ -8,7 +8,7 @@
    
     function checkIt() {
         var userinput = eval("document.userinput");
-        //console.log(userinput.con.value);
+        console.log(userinput.con.value);
         
         if(!userinput.id.value) {
             alert("ID를 입력하세요");
@@ -37,11 +37,13 @@
             return false;
         }
      
+        
         if(!userinput.jumin1.value  || !userinput.jumin2.value )
         {
             alert("주민등록번호를 입력하세요");
             return false;
         }
+        
         
     }
 
@@ -52,6 +54,7 @@
             alert("아이디를 입력하세요");
             return;
         }
+        
         // url과 사용자 입력 id를 조합합니다.
         url = "confirmId.jsp?id=" + userinput.id.value ;
        
@@ -131,7 +134,7 @@ window.open(url,"post","toolbar=no ,width=500 ,height=300 ,directories=no,status
     </tr>
     <tr> 
        <td width="200">우편번호</td>
-       <td> <input type="text" name="zipcode" size="7">
+       <td> <input type="text" name="zipcode" size="7" readonly="readonly">
                <input type="button" value="우편번호찾기" onClick="zipCheck()">
                우편번호를 검색 하세요.</td>
           </tr>

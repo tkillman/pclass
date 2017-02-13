@@ -5,15 +5,17 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 
 <%
+
 try{
-   if(session.getAttribute("memId")==null){%>//로그온이 되지 않았을 경우
+   if(session.getAttribute("memId")==null){ //로그온이 되지 않았을 경우 %>
    
 <script>
-<!--
+
 function focusIt()
 {     
    document.inform.id.focus();//내가 작업하고 있는 문서의 inform이라는 곳에 id에 커서를 가져다 줌
 }
+
 
 function checkIt()
 {
@@ -29,7 +31,7 @@ inputForm.passwd.focus();
 return false;
    }
 }
-//-->
+
 </script>
 </head>
 
@@ -57,7 +59,8 @@ return false;
             <input type="submit" name="Submit" value="로그인">
             <input type="button"  value="회원가입" onclick="javascript:window.location='inputForm.jsp'">
           </td></form></tr></table>
-     <%}else{%>
+     <%}else{
+     %>
        <table width=500 cellpadding="0" cellspacing="0"  align="center" border="1" >
          <tr>
            <td width="300" bgcolor="<%=bodyback_c%>" height="20">하하하</td>
@@ -68,6 +71,7 @@ return false;
              <form  method="post" action="logout.jsp"> 
              <input type="submit"  value="로그아웃">
              <input type="button" value="회원정보변경" onclick="javascript:window.location='modify.jsp'">
+             <input type="button" value="비밀번호 찾기" onclick="javascript:window.location='passwd.jsp'">
              </form>
          </td>
         </tr>
@@ -76,6 +80,7 @@ return false;
       </tr>
      </table>
      <br>
+     
 <%}
 }catch(NullPointerException e){}
 %>

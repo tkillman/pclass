@@ -9,11 +9,13 @@
 </jsp:useBean>
 
 <%
-    String id = (String)session.getAttribute("memId");
-member.setId(id);
 
-LogonDBBean manager = LogonDBBean.getInstance();
+    String id = (String)session.getAttribute("memId");
+	member.setId(id);
+
+	LogonDBBean manager = LogonDBBean.getInstance();
     manager.updateMember(member);
+
 %>
 <link href="style.css" rel="stylesheet" type="text/css">
 
@@ -32,7 +34,7 @@ LogonDBBean manager = LogonDBBean.getInstance();
       <form>
     <input type="button" value="메인으로" onclick="window.location='main.jsp'">
       </form>
-      5초후에 메인으로 이동합니다.<meta http-equiv="Refresh" content="5;url=main.jsp" >
+      5초후에 메인으로 이동합니다.<meta http-equiv="Refresh" content="5;url=main.jsp">
     </td>
   </tr>
 </table>

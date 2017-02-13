@@ -9,7 +9,7 @@
 
 <%
     String id = request.getParameter("id");
-LogonDBBean manager = LogonDBBean.getInstance();
+    LogonDBBean manager = LogonDBBean.getInstance();
     int check= manager.confirmId(id);
  
 %>
@@ -58,8 +58,8 @@ LogonDBBean manager = LogonDBBean.getInstance();
   function setid()
     {
     opener.document.userinput.id.value="<%=id%>";//opener:새로운 창을 연다.
-    opener.document.userinput.con.value="ok";
-self.close();
+    opener.document.userinput.con.value="yes";
+	self.close();
 }
 
 </script>

@@ -9,8 +9,9 @@
 
 
 <script>
-   <!--
+   
     function checkIt() {
+    	
         var userinput = eval("document.userinput");
               
         if(!userinput.passwd.value ) {
@@ -23,7 +24,7 @@
             return false;
         }
       
-        if(!userinput.username.value) {
+        if(!userinput.name.value) {
             alert("사용자 이름을 입력하세요");
             return false;
         }
@@ -33,7 +34,7 @@
             return false;
         }
     }
--->
+
 
 function zipCheck(){
 url="ZipCheck.jsp?check=y";
@@ -71,7 +72,7 @@ try{
 
     <tr>
       <td  width="200"> 사용자 ID</td>
-      <td  width="400"><%=c.getId()%></td>
+      <td  width="400"><%=c.getId()%></td><!-- 바꾸면 안되기 때문에 input 태그를 사용하지 않는다. -->
     </tr>
    
      <tr>
@@ -99,7 +100,7 @@ try{
    <tr>
       <td width="200">E-Mail</td>
       <td width="400">
-    <%if(c.getEmail()==null){%>
+    <%if(c.getEmail()==null){//데이터 베이스에 not null이 안 걸려 있으므로 null 처리 %>
   <input type="text" name="email" size="40" maxlength="30" >
 <%}else{%>
           <input type="text" name="email" size="40" maxlength="30" value="<%=c.getEmail()%>">
