@@ -68,6 +68,11 @@
     </td>
   </tr>
 </table>   
+
+<textarea name="comment" id="comment" cols="50"></textarea><input type="button" name="btn1" id="btn1" value="입력">
+
+<br><br><br><br><br>
+<div id="result">코멘트 결과값 표현할 장소</div>
 <%
 }catch(Exception e){}
 %>
