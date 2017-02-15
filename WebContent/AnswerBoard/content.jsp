@@ -10,16 +10,22 @@
 </head>
 
 <%
+	// 글 번호
    int num = Integer.parseInt(request.getParameter("num"));
-   String pageNum = request.getParameter("pageNum");
-
+   
+	//페이지 번호
+	String pageNum = request.getParameter("pageNum");
+   
+    
    SimpleDateFormat sdf =
         new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
    try{
-      BoardDBBean dbPro = BoardDBBean.getInstance();
+     
+	  BoardDBBean dbPro = BoardDBBean.getInstance();
       BoardDataBean article =  dbPro.getArticle(num);
  
+  //답글 쓸 때 원글의 상태를 알아야 하므로 미리 빼 놓는다.    
   int ref=article.getRef();
   int re_step=article.getRe_step();
   int re_level=article.getRe_level();

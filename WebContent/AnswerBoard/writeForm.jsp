@@ -8,10 +8,14 @@
 </head>
 
 <%
-  int num=0,ref=1,re_step=0,re_level=0;
+  //원글의 상태 , num==0이면 원글이다.
+  int num=0,ref=0,re_step=0,re_level=0;
+ 
+	
   try{ 
-    if(request.getParameter("num")!=null){
-num=Integer.parseInt(request.getParameter("num"));
+    
+	  if(request.getParameter("num")!=null){// 답글인 상태
+num=Integer.parseInt(request.getParameter("num")); 
 ref=Integer.parseInt(request.getParameter("ref"));
 re_step=Integer.parseInt(request.getParameter("re_step"));
 re_level=Integer.parseInt(request.getParameter("re_level"));
@@ -42,7 +46,7 @@ re_level=Integer.parseInt(request.getParameter("re_level"));
   <tr>
     <td  width="70"  bgcolor="<%=value_c%>" align="center" >제 목</td>
     <td  width="330">
-    <%if(request.getParameter("num")==null){%>
+    <%if(request.getParameter("num")==null){// subject 비워둠%>
        <input type="text" size="40" maxlength="50" name="subject"></td>
 <%}else{%>
    <input type="text" size="40" maxlength="50" name="subject" value="[답변]"></td>

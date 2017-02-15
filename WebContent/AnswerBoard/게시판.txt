@@ -29,8 +29,6 @@
 	);
 	
 	
-	
-	
 	create sequence board_num;//시퀀스생성
 
 	//글 순서
@@ -50,15 +48,13 @@
 
 
 
-
-
-
 2.JavaBean
 :[BoardDataBean.java]
 package board;
 import java.sql.Timestamp;
 
 public class BoardDataBean{
+    
     private int num;
     private String writer;
     private String subject;
@@ -146,6 +142,7 @@ public class BoardDataBean{
         return re_step;
     }       
 }
+
 
 :[BoardDBBean.java]
 package board;
