@@ -1,5 +1,7 @@
 ***Comment***
+
 1. Table
+
 create table reply_comment(
 	content_num number not null,		
 	commenter varchar2(20) not null,	-- 게시글의 글번호
@@ -31,7 +33,6 @@ public class CommentDataBean {
 	public void setComment_num(int comment_num) {
 		this.comment_num = comment_num;
 	}
-	private String ip;
 	
 	public String getCommentt() {
 		return commentt;
