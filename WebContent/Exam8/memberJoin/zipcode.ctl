@@ -1,5 +1,5 @@
 load data
-infile 'd:\zipcode.csv'
+infile 'c:\zipcode.csv'
 append
 into table zipcode
 fields terminated by ','

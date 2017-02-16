@@ -1,4 +1,3 @@
-<%@page import="com.sun.xml.internal.txw2.Document"%>
 <%@page import="logon.ZipcodeBean"%>
 <%@page import="logon.LogonDBBean"%>
 <%@page import="java.util.Vector"%>

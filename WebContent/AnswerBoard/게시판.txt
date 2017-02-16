@@ -3,25 +3,25 @@
 
 
 	create table board(
-	num number not null primary key, //글번호
-	writer varchar2(10) not null, // 
+	num number not null primary key, --글번호
+	writer varchar2(10) not null,  
 	email varchar2(20),
 	subject varchar2(50) not null,
 	passwd varchar2(12) not null,
 	reg_date date not null,  
-	readcount number default 0,조회수 // null +1 은 null 이 된다.
+	readcount number default 0,--조회수 // null +1 은 null 이 된다.
 	
 	--글의 정렬 순서를 위해
-	ref number not null,글의 그룹번호 -- 글 번호를 따라간다.
-	re_step number not null, 제목글과 답변글의 순서
-	re_level number not null, 글의 레벨
+	ref number not null,--글의 그룹번호 -- 글 번호를 따라간다.
+	re_step number not null,-- 제목글과 답변글의 순서
+	re_level number not null, --글의 레벨
 	
 	content varchar2(4000) not null, 
 	
 	-- varchar2(long) 많은 데이터를 받을 수 있다. 
-	단점 1. where을 쓸 수 없다.(검색 불가) 2. long타입의 테이블은 컬럼은 하나만 존재할 수 있다. 
+	--단점 1. where을 쓸 수 없다.(검색 불가) 2. long타입의 테이블은 컬럼은 하나만 존재할 수 있다. 
 	
-	BLOB , CLOB 바이너리 데이터 저장 가능. 
+	--BLOB , CLOB 바이너리 데이터 저장 가능. 
 	
 	ip varchar2(20) not null
 	
