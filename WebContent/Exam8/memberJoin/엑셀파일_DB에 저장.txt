@@ -33,5 +33,6 @@ fields terminated by ','
         area4
 )
 
-
+C:\Users\user\Downloads
 cmd> sqlldr userid=cc/1234 control='f:\zipcode.ctl' log='f:\zipcode.txt'
+
