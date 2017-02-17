@@ -162,7 +162,7 @@ $(function(){
 							&nbsp;
 							
 							<%if(comment_num_modify==dbc.getComment_num()){%>
-							<a href="content1.jsp?num=<%=dbc.getContent_num()%>&pageNum=<%=pageNum%>">[취소]</a>
+							<a href="content1.jsp?num=<%=dbc.getContent_num()%>&pageNum=<%=pageNum%>&cPageNum=<%=request.getParameter("cPageNum")%>">[취소]</a>
 							<%} else{%>
 							<a href="delCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num() %>&p_num=<%=pageNum %>" >[삭제]</a>&nbsp;
 							<%} %>
