@@ -13,7 +13,8 @@
 	String comment_num=request.getParameter("cmn");
 	String content_num=request.getParameter("ctn");
 	String p_num=request.getParameter("p_num");
-	String url="content1.jsp?num="+content_num+"&pageNum="+p_num;
+	String cPageNum=request.getParameter("cPageNum");
+	String url="content1.jsp?num="+content_num+"&pageNum="+p_num+"&cPageNum="+cPageNum;
 
 %>
 
@@ -49,6 +50,7 @@
 				<input type=hidden name=content_num value=<%=content_num %>>
 				<input type=hidden name=comment_num value=<%=comment_num%>>
 				<input type=hidden name=p_num value=<%=p_num%>>
+				<input type=hidden name=cPageNum value=<%=cPageNum%>>
 			</td>
 		</tr>
 		<tr height=30>

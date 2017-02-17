@@ -10,15 +10,38 @@
 <head>
 <title>게시판</title>
 <link href="style.css" rel="stylesheet" type="text/css">
-<script>
-
-function writeSave(){
-	if(document.comment.commentt.value==""){
-	  alert("작성자를 입력하십시요.");
-	  document.comment.commentt.focus();
-	  return false;
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	function writeSave(){
+		if(document.comment.commentt.value==""){
+		  alert("작성자를 입력하십시요.");
+		  document.comment.commentt.focus();
+		  return false;
+		}
 	}
-}
+
+	$('#submitComment').on('click',function(){
+		//alert("보내기")
+		if(!$('#comment<%=request.getParameter("modifyMode")%>').val()){
+			alert("코멘트를 입력해주세요.");
+			$('#comment<%=request.getParameter("modifyMode")%>').focus();
+			return false;
+		}
+		
+		var commentt =$('#comment<%=request.getParameter("modifyMode")%>').val()
+		//console.log(commentt);
+		
+		
+		location.href="ModCommentPro.jsp?commentt="+commentt+"&comment_num="+<%=request.getParameter("modifyMode")%>+"&num="+<%=request.getParameter("num")%>+"&pageNum="+<%=request.getParameter("pageNum")%>+"&cPageNum="+<%=request.getParameter("cPageNum")%>
+		
+		
+		
+	})
+	
+	
+})
 </script>
 </head>
 
@@ -46,6 +69,8 @@ function writeSave(){
 			// 커멘트디비빈 객체를 생성
 			CommentDBBean cdb=CommentDBBean.getInstance();
 			ArrayList comments=cdb.getComments(article.getNum(),startRow, endRow);
+			
+			//코멘트 숫자
 			int count=cdb.getCommentCount(article.getNum());
 			int ref=article.getRef();
 			int re_step=article.getRe_step();
@@ -113,20 +138,46 @@ function writeSave(){
 					</tr>
 					<%
 						for(int i=0;i<comments.size();i++){
+						
 							CommentDataBean dbc=(CommentDataBean)comments.get(i);
+							int comment_num_modify=-1;
+							
+							if(request.getParameter("modifyMode")!=null){
+							comment_num_modify = Integer.parseInt(request.getParameter("modifyMode"));
+							}
+							
+							 
+							
 					%>
 						<tr>
 							<td align=left size=250 bgcolor=<%=value_c %>>
 							&nbsp;<b><%=dbc.getCommenter() %>&nbsp;님</b> (<%=sdf.format(dbc.getReg_date())%>)
 							</td>
 							<td align=right size=250 bgcolor=<%=value_c %>> 접속IP:<%=dbc.getIp() %>
-							<a href="updCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num() %>&p_num=<%=pageNum%>" >[수정]</a>
-							&nbsp;<a href="delCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num() %>&p_num=<%=pageNum %>" >[삭제]</a>&nbsp;
+							<%if(comment_num_modify==dbc.getComment_num()){%> 
+							<a id='submitComment'>[완료]</a>
+							<%} else{%>
+							<a href="updCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num()%>&p_num=<%=pageNum%>&cPageNum=<%=cPageNum%>">[수정]</a>
+							<%} %>
+							&nbsp;
+							
+							<%if(comment_num_modify==dbc.getComment_num()){%>
+							<a href="content1.jsp?num=<%=dbc.getContent_num()%>&pageNum=<%=pageNum%>">[취소]</a>
+							<%} else{%>
+							<a href="delCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num() %>&p_num=<%=pageNum %>" >[삭제]</a>&nbsp;
+							<%} %>
 							</td>
 						</tr>	
 						<tr>
-							<td colspan=2><input type="text" name="comment" id="comment" value="<%=dbc.getCommentt()%>" readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"><td>
+						<%if(comment_num_modify==dbc.getComment_num()){%>
+						<td colspan=2><input type="text" name="comment<%=dbc.getComment_num()%>" id="comment<%=dbc.getComment_num()%>" value="<%=dbc.getCommentt()%>"><td>
+						<%} else {%>
+							<td colspan=2><%=dbc.getCommentt()%></td>
+							<%}%>
+							
+					
 					<%} %> // for
+					<%} %> //count
 						</tr>
 						
 				</table>
@@ -160,14 +211,14 @@ function writeSave(){
 %>
  				       <a href="content1.jsp?num=<%=num %>&pageNum=<%=pageNum %>&cPageNum=<%= startPage + 5 %>">[다음]</a>
 <%
-  		      }
+  		      
     		} // if
 %>
 		</center>
 	</tr>
 </table>
-<%} %>
-			<%
+<%}%>  //count
+	<% 		
 	}catch(Exception e){}
 			%>
 			</center>

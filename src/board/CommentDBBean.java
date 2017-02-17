@@ -166,13 +166,53 @@ public class CommentDBBean {
 		return x;
 	}
 	
-	public int checkPw(){
+	public int checkPw(int content_num,int comment_num,String passwd){
+		int resultNum =-1;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String dbpasswd="";
 		
+		try {
+			conn = getConnection();
+			String sql = "select passwd from b_comment where content_num=? and comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, content_num);
+			pstmt.setInt(2, comment_num);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				dbpasswd =rs.getString(1);
+				if(dbpasswd.equals(passwd)){
+					resultNum = 1;
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return resultNum;
 	}
 	
-	
-	
-	
-	
+	public void modifyComment(int comment_num,String commentt){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			conn = getConnection();
+			String sql = "update b_comment set commentt=? where comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, commentt);		
+			pstmt.setInt(2, comment_num);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
