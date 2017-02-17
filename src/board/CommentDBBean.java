@@ -20,10 +20,12 @@ public class CommentDBBean {
 	
 	private CommentDBBean(){}
 	
+	
 	private Connection getConnection() throws Exception{
 		String jdbcDriver="jdbc:apache:commons:dbcp:pool";
 		return DriverManager.getConnection(jdbcDriver);
 	}
+	
 	
 	public void insertComment(CommentDataBean cdb) throws Exception{
 		
@@ -116,6 +118,7 @@ public class CommentDBBean {
 					cdb.setCommentt(rs.getString("commentt"));
 					cdb.setIp(rs.getString("ip"));
 					cdb.setReg_date(rs.getTimestamp("reg_date"));
+					
 					cm.add(cdb);
 				}while(rs.next());
 				count=cm.size();
@@ -124,9 +127,11 @@ public class CommentDBBean {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{
+			
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(conn);
+			
 		}
 		return count;
 	}
@@ -152,9 +157,9 @@ public class CommentDBBean {
 					pstmt.setInt(1, content_num);
 					pstmt.setInt(2, comment_num);
 					pstmt.executeUpdate();
-					x=1;
+					x=1;//삭제
 				}else
-					x=0;
+					x=0; //삭제 실패
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();

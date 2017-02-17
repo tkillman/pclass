@@ -1,0 +1,902 @@
+***방명록 만들기***
+
+[시퀀스 생성]
+create sequence message_id_seq;
+
+/*시퀀스 삭제
+drop sequence 시퀀스명;
+
+시퀀스명.NEXTVAL : 증가한 값
+시퀀스명.CURRVAL : 현재 값
+
+rownum : 가상번호
+*/
+[테이블 생성]
+create table guestbook_message (
+    message_id number not null primary key,
+    guest_name varchar2(50) not null,
+    password varchar2(10) not null,
+    message long not null
+)
+
+[DBCPInit.java]
+
+package jdbc;
+
+import java.sql.DriverManager;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
+import org.apache.commons.dbcp2.ConnectionFactory;
+import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnection;
+import org.apache.commons.dbcp2.PoolableConnectionFactory;
+import org.apache.commons.dbcp2.PoolingDriver;
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+
+public class DBCPInit extends HttpServlet {
+
+	@Override
+	public void init() throws ServletException {
+		loadJDBCDriver();
+		initConnectionPool();
+	}
+
+	private void loadJDBCDriver() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException ex) {
+			throw new RuntimeException("fail to load JDBC Driver", ex);
+		}
+	}
+
+	private void initConnectionPool() {
+		try {
+			String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE";
+			String username = "su";
+			String pw = "su1234";
+			ConnectionFactory connFactory = 
+					new DriverManagerConnectionFactory(jdbcUrl, username, pw);
+			PoolableConnectionFactory poolableConnFactory = 
+					new PoolableConnectionFactory(connFactory, null);
+			poolableConnFactory.setValidationQuery("select 1");
+			GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+			poolConfig.setTimeBetweenEvictionRunsMillis(1000L * 60L * 5L);
+			poolConfig.setTestWhileIdle(true);
+			poolConfig.setMinIdle(4);
+			poolConfig.setMaxTotal(50);
+			GenericObjectPool<PoolableConnection> connectionPool = 
+					new GenericObjectPool<>(poolableConnFactory, poolConfig);
+			//PoolabeConnectionFactory에도 커넥션 풀을 연결
+			poolableConnFactory.setPool(connectionPool);
+			Class.forName("org.apache.commons.dbcp2.PoolingDriver");
+			
+			PoolingDriver driver = 
+					(PoolingDriver) DriverManager.getDriver("jdbc:apache:commons:dbcp:");
+											driver.registerPool("pool", connectionPool);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+}
+
+
+
+[jdbcUtil.java]
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class jdbcUtil {
+	public static void close(ResultSet rs){
+		if(rs!=null){
+			try{
+				rs.close();
+			}catch(SQLException e){}
+		}
+	}
+	
+	public static void close(Statement stmt){
+		if(stmt!=null){
+			try{
+				stmt.close();
+			}catch(SQLException e){}
+		}
+	}
+	
+	public static void close(Connection conn){
+		if(conn!=null){
+			try{
+				conn.close();
+			}catch(SQLException e){}
+		}
+	}
+	
+	public static void rollback(Connection conn){
+		if(conn!=null){
+			try{
+				conn.rollback();
+			}catch(SQLException e){}
+		}
+	}
+}
+
+
+
+
+
+
+[ConnectionProvider.java]
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionProvider {
+	public static Connection getConnection() throws SQLException{
+		return DriverManager.getConnection("jdbc:apache:commons:dbcp:pool");
+	}
+}
+
+
+
+
+
+[Message.java]
+package model;
+
+public class Message {
+	private int id;
+	private String guestName;
+	private String password;
+	private String message;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getGuestName() {
+		return guestName;
+	}
+	public void setGuestName(String guestName) {
+		this.guestName = guestName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public boolean hasPassword(){
+		return password!=null&&!password.isEmpty();
+	}
+	
+}
+
+
+
+[MessageDao.java]
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import model.Message;
+import jdbc.jdbcUtil;
+
+public abstract class MessageDao {
+	public abstract int insert(Connection conn, Message message)
+		throws SQLException;
+	
+	public Message select(Connection conn, int messageId) throws SQLException{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			pstmt=conn.prepareStatement("select * from guestbook_message where message_id=?");
+			pstmt.setInt(1, messageId);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				return makeMessageFromResultSet(rs);
+			else
+				return null;
+		}finally{
+			jdbcUtil.close(rs);
+			jdbcUtil.close(pstmt);
+		}
+	}
+	
+	protected Message makeMessageFromResultSet(ResultSet rs) throws SQLException{
+		Message message=new Message();
+		message.setId(rs.getInt("message_id"));
+		message.setGuestName(rs.getString("guest_name"));
+		message.setPassword(rs.getString("password"));
+		message.setMessage(rs.getString("message"));
+		return message;
+	}
+	
+	public int selectCount(Connection conn) throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try{
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from guestbook_message");
+			rs.next();
+			return rs.getInt(1);
+		}finally{
+			jdbcUtil.close(rs);
+			jdbcUtil.close(stmt);
+		}
+	}
+	
+	public abstract List<Message> selectList(Connection conn, int firstRow, int endRow)
+		throws SQLException;
+	
+	public int delete(Connection conn, int messageId) throws SQLException{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			pstmt=conn.prepareStatement("delete from guestbook_message where message_id=?");
+			pstmt.setInt(1, messageId);
+			return pstmt.executeUpdate();
+		}finally{
+			jdbcUtil.close(rs);
+			jdbcUtil.close(pstmt);
+		}
+	}
+}
+
+
+
+
+
+[OracleMessageDao.java]
+package dao.oracle;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import dao.MessageDao;
+import model.Message;
+import jdbc.jdbcUtil;
+
+public class OracleMessageDao extends MessageDao {
+
+	public int insert(Connection conn, Message message) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("insert into guestbook_message(message_id, guest_name, password, message) values (message_id_seq.NEXTVAL, ?, ?, ?)");
+			pstmt.setString(1, message.getGuestName());
+			pstmt.setString(2, message.getPassword());
+			pstmt.setString(3, message.getMessage());
+			return pstmt.executeUpdate();
+		} finally {
+			jdbcUtil.close(pstmt);
+		}
+	}
+
+	public List<Message> selectList(Connection conn, int firstRow, int endRow)
+			throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select message_id, guest_name, password, message from (select rownum rnum, message_id, guest_name, password, message from (select * from guestbook_message m order by m.message_id desc) where rownum <= ?) where rnum >= ?");
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, firstRow);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				List<Message> messageList = new ArrayList<Message>();
+				do {
+					messageList.add(super.makeMessageFromResultSet(rs));
+				} while (rs.next());
+				return messageList;
+			} else {
+				return Collections.emptyList();
+			}
+		} finally {
+			jdbcUtil.close(rs);
+			jdbcUtil.close(pstmt);
+		}
+	}
+
+}
+
+
+
+
+
+[MessageDaoProvider.java]
+package dao;
+
+import dao.oracle.OracleMessageDao;
+
+public class MessageDaoProvider {
+	private static MessageDaoProvider instance=new MessageDaoProvider();
+	
+	public static MessageDaoProvider getInstance(){
+		return instance;
+	}
+	
+	private MessageDaoProvider(){}
+	
+	private OracleMessageDao oracleDao=new OracleMessageDao();
+	private String dbms;
+	
+	void setDbms(String dbms){
+		this.dbms=dbms;
+	}
+	
+	public MessageDao getMessageDao(){
+		if("oracle".equals(dbms))
+			return oracleDao;
+		return null;
+	}
+}
+
+
+
+
+
+
+[MessageDaoProviderInit.java]
+package dao;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+public class MessageDaoProviderInit extends HttpServlet{
+	public void init(ServletConfig config)throws ServletException{
+		String dbms=config.getInitParameter("dbms");
+		if(dbms!=null){
+			MessageDaoProvider.getInstance().setDbms(dbms);
+		}
+	}
+}
+
+
+[web.xml]::추가
+
+<servlet>
+   <servlet-name>DBCPInit</servlet-name>
+  <servlet-class>jdbc.DBCPInit</servlet-class>
+  <load-on-startup>1</load-on-startup>
+</servlet>
+  
+  
+<servlet>
+   <servlet-name>MessageDaoProviderInit</servlet-name>
+  <servlet-class>dao.MessageDaoProviderInit</servlet-class>
+  <init-param>
+  	<param-name>dbms</param-name>
+  	<param-value>oracle</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+</servlet>
+  
+
+
+
+
+[ServiceException.java]
+package service;
+
+public class ServiceException extends Exception {
+
+	public ServiceException(String message, Exception cause) {
+		super(message, cause);
+	}
+
+	public ServiceException(String message) {
+		super(message);
+	}
+
+}
+
+
+
+
+[MessageListView.java]
+package model;
+
+import java.util.List;
+
+public class MessageListView {
+	private int messageTotalCount;
+	private int currentPageNumber;
+	private List<Message> messageList;
+	private int pageTotalCount;
+	private int messageCountPerPage;
+	private int firstRow;
+	private int endRow;
+	
+	public MessageListView(List<Message> messageList, int messageTotalCount,int currentPageNumber, int messageCountPerPage, int startRow, int endRow){
+		this.messageList=messageList;
+		this.messageTotalCount=messageTotalCount;
+		this.currentPageNumber=currentPageNumber;
+		this.messageCountPerPage=messageCountPerPage;
+		this.firstRow=startRow;
+		this.endRow=endRow;
+		
+		calculatePageTotalCount();
+	}
+	
+	private void calculatePageTotalCount(){
+		if(messageTotalCount==0){
+			messageTotalCount=0;
+		}else{
+			pageTotalCount=messageTotalCount/messageCountPerPage;
+			if(messageTotalCount%messageCountPerPage>0)
+				pageTotalCount++;
+		}
+	}
+	
+	public int getMessageTotalCount() {
+		return messageTotalCount;
+	}
+	public void setMessageTotalCount(int messageTotalCount) {
+		this.messageTotalCount = messageTotalCount;
+	}
+	public int getCurrentPageNumber() {
+		return currentPageNumber;
+	}
+	public void setCurrentPageNumber(int currentPageNumber) {
+		this.currentPageNumber = currentPageNumber;
+	}
+	public List<Message> getMessageList() {
+		return messageList;
+	}
+	public void setMessageList(List<Message> messageList) {
+		this.messageList = messageList;
+	}
+	public int getPageTotalCount() {
+		return pageTotalCount;
+	}
+	public void setPageTotalCount(int pageTotalCount) {
+		this.pageTotalCount = pageTotalCount;
+	}
+	public int getMessageCountPerPage() {
+		return messageCountPerPage;
+	}
+	public void setMessageCountPerPage(int messageCountPerPage) {
+		this.messageCountPerPage = messageCountPerPage;
+	}
+	public int getFirstRow() {
+		return firstRow;
+	}
+	public void setFirstRow(int firstRow) {
+		this.firstRow = firstRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	
+	public boolean isEmpty(){
+		return messageTotalCount==0;
+	}
+	
+}
+
+
+
+
+
+[GetMessageListService.java]
+package service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+
+import dao.MessageDao;
+import dao.MessageDaoProvider;
+import model.Message;
+import model.MessageListView;
+import jdbc.jdbcUtil;
+import jdbc.ConnectionProvider;
+
+public class GetMessageListService {
+	private static GetMessageListService instance =
+			new GetMessageListService();
+
+	public static GetMessageListService getInstance() {
+		return instance;
+	}
+
+	private GetMessageListService() {
+	}
+
+	private static final int MESSAGE_COUNT_PER_PAGE = 3;
+
+	public MessageListView getMessageList(int pageNumber)
+			throws ServiceException {
+		Connection conn = null;
+		int currentPageNumber = pageNumber;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MessageDao messageDao =
+					MessageDaoProvider.getInstance().getMessageDao();
+
+			int messageTotalCount = messageDao.selectCount(conn);
+
+			List<Message> messageList = null;
+			int firstRow = 0;
+			int endRow = 0;
+			if (messageTotalCount > 0) {
+				firstRow =
+						(pageNumber - 1) * MESSAGE_COUNT_PER_PAGE + 1;
+				endRow = firstRow + MESSAGE_COUNT_PER_PAGE - 1;
+				messageList =
+						messageDao.selectList(conn, firstRow, endRow);
+			} else {
+				currentPageNumber = 0;
+				messageList = Collections.emptyList();
+			}
+			return new MessageListView(messageList,
+					messageTotalCount, currentPageNumber,
+					MESSAGE_COUNT_PER_PAGE, firstRow, endRow);
+		} catch (SQLException e) {
+			throw new ServiceException("메시지 목록 구하기 실패: "
+					+ e.getMessage(), e);
+		} finally {
+			jdbcUtil.close(conn);
+		}
+	}
+}
+
+
+
+
+
+[WriteMessageService.java]
+package service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import dao.MessageDao;
+import dao.MessageDaoProvider;
+import model.Message;
+import jdbc.jdbcUtil;
+import jdbc.ConnectionProvider;
+
+public class WriteMessageService {
+	private static WriteMessageService instance =
+			new WriteMessageService();
+
+	public static WriteMessageService getInstance() {
+		return instance;
+	}
+
+	private WriteMessageService() {
+	}
+
+	public void write(Message message) throws ServiceException {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MessageDao messageDao =
+					MessageDaoProvider.getInstance().getMessageDao();
+			messageDao.insert(conn, message);
+		} catch (SQLException e) {
+			throw new ServiceException(
+					"메시지 등록 실패: " + e.getMessage(), e);
+		} finally {
+			jdbcUtil.close(conn);
+		}
+	}
+
+}
+
+
+
+
+[DeleteMessageService.java]
+package service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import dao.MessageDao;
+import dao.MessageDaoProvider;
+import model.Message;
+import service.InvalidMessagePassowrdException;
+import jdbc.jdbcUtil;
+import jdbc.ConnectionProvider;
+
+public class DeleteMessageService {
+
+	private static DeleteMessageService instance =
+			new DeleteMessageService();
+
+	public static DeleteMessageService getInstance() {
+		return instance;
+	}
+
+	private DeleteMessageService() {
+	}
+
+	public void deleteMessage(int messageId, String password)
+			throws ServiceException, InvalidMessagePassowrdException,
+			MessageNotFoundException {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+
+			MessageDao messageDao =
+					MessageDaoProvider.getInstance().getMessageDao();
+			Message message = messageDao.select(conn, messageId);
+			if (message == null) {
+				throw new MessageNotFoundException("메시지가 없습니다:"
+						+ messageId);
+			}
+			if (!message.hasPassword()) {
+				throw new InvalidMessagePassowrdException();
+			}
+			if (!message.getPassword().equals(password)) {
+				throw new InvalidMessagePassowrdException();
+			}
+			messageDao.delete(conn, messageId);
+
+			conn.commit();
+		} catch (SQLException ex) {
+			jdbcUtil.rollback(conn);
+			throw new ServiceException("삭제 처리 중 에러가 발생했습니다:"
+					+ ex.getMessage(), ex);
+		} catch (InvalidMessagePassowrdException ex) {
+			jdbcUtil.rollback(conn);
+			throw ex;
+		} catch (MessageNotFoundException ex) {
+			jdbcUtil.rollback(conn);
+			throw ex;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.setAutoCommit(false);
+				} catch (SQLException e) {
+				}
+				jdbcUtil.close(conn);
+			}
+		}
+	}
+}
+
+
+
+
+
+[InvalidMessagePassowrdException.java]
+package service;
+
+public class InvalidMessagePassowrdException extends Exception {
+
+}
+
+
+
+
+
+[MessageNotFoundException.java]
+package service;
+
+public class MessageNotFoundException extends Exception {
+
+	public MessageNotFoundException(String message) {
+		super(message);
+	}
+
+}
+
+
+
+
+
+[list.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page import="model.Message" %>
+<%@ page import="model.MessageListView" %>
+<%@ page import="service.GetMessageListService" %>
+
+<%
+	String pageNumberStr=request.getParameter("page");
+	int pageNumber=1;
+	if(pageNumberStr!=null)
+		pageNumber=Integer.parseInt(pageNumberStr);
+	
+	GetMessageListService messageListService=GetMessageListService.getInstance();
+	MessageListView viewData=messageListService.getMessageList(pageNumber);
+%>
+<html>
+<head>
+<title>방명록 메시지 목록</title>
+</head>
+<body>
+<form action=writeMessage.jsp method=post>
+이름: <input type=text name=guestName ><br />
+암호: <input type=password name=password><br />
+메시지: <textarea name=message cols=30 rows=3></textarea> <br />
+<input type=submit value="메시지 남기기">
+</form>
+<hr>
+
+<%
+	if(viewData.isEmpty()){
+%>
+등록된 메시지가 없습니다.
+<%
+	}else{
+%>
+<table border=1>
+<%
+		for(Message message:viewData.getMessageList()){
+%>
+	<tr>
+		<td>
+		메시지 번호:<%=message.getId() %><br>
+		손님 이름:<%=message.getGuestName() %><br>
+		메시지:<%=message.getMessage() %><br>
+		<a href="confirmDeletion.jsp?messageId=<%=message.getId() %>">[삭제하기]</a>
+		</td>
+	</tr>
+<%	} %>
+</table>
+<%	for(int i=1;i<=viewData.getPageTotalCount();i++){%>
+<a href="list.jsp?page=<%=i %>">[<%=i %>]</a>
+<%	} %>
+<%} %>
+</body>
+</html>
+
+
+
+
+
+[writeMessage.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page errorPage="errorView.jsp" %>
+<%@ page import="model.Message" %>
+<%@ page import="service.WriteMessageService" %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<jsp:useBean id="message" class="model.Message">
+	<jsp:setProperty name="message" property="*" />
+</jsp:useBean>
+<%
+	WriteMessageService writeService = WriteMessageService.getInstance();
+	writeService.write(message);
+%>
+<html>
+<head>
+	<title>방명록 메시지 남김</title>
+</head>
+<body>
+방명록에 메시지를 남겼습니다.
+<br/>
+<a href="list.jsp">[목록 보기]</a>
+</body>
+</html>
+
+
+
+
+
+[confirmDeletion.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<html>
+<head>
+	<title>방명록 메시지 삭제 확인</title>
+</head>
+<body>
+
+<form action="deleteMessage.jsp" method="post">
+<input type="hidden" name="messageId" value="<%= request.getParameter("messageId") %>" />
+메시지를 삭제하시려면 암호를 입력하세요:<br/>
+암호: <input type="password" name="password" /> <br />
+<input type="submit" value="메시지 삭제하기" />
+</form>
+</body>
+</html>
+
+
+
+
+
+[deleteMessage.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page errorPage="errorView.jsp" %>
+<%@ page import="service.DeleteMessageService" %>
+<%@ page import="service.InvalidMessagePassowrdException" %>
+<%
+	int messageId = Integer.parseInt(request.getParameter("messageId"));
+	String password = request.getParameter("password");
+	boolean invalidPassowrd = false;
+	try {
+		DeleteMessageService deleteService = DeleteMessageService.getInstance();
+		deleteService.deleteMessage(messageId, password);
+	} catch(InvalidMessagePassowrdException ex) {
+		invalidPassowrd = true;
+	}
+%>
+<html>
+<head>
+	<title>방명록 메시지 삭제함</title>
+</head>
+<body>
+<%  if (!invalidPassowrd) { %>
+메시지를 삭제하였습니다.
+<%  } else { %>
+입력한 암호가 올바르지 않습니다. 암호를 확인해주세요.
+<%  }%>
+<br/>
+<a href="list.jsp">[목록 보기]</a>
+</body>
+</html>
+
+
+
+
+
+[errorView.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page isErrorPage="true" %>
+<html>
+<head>
+	<title>서비스 에러</title>
+</head>
+<body>
+일시적인 문제로 인해 서비스를 사용할 수 없습니다.<br/>
+서비스 사용에 불편을 드려 죄송합니다.
+<%
+	exception.printStackTrace();
+%>
+</body>
+</html>
+
+<!--
+만약 에러 페이지의 길이가 513 바이트보다 작다면,
+인터넷 익스플로러는 이 페이지가 출력하는 에러 페이지를 출력하지 않고
+자체적으로 제공하는 'HTTP 오류 메시지' 화면을 출력할 것이다.
+만약 에러 페이지의 길이가 513 바이트보다 작은데
+에러 페이지의 내용이 인터넷 익스플로러에서도 올바르게 출력되길 원한다면,
+응답 결과에 이 주석과 같은 내용을 포함시켜서
+에러 페이지의 길이가 513 바이트 이상이 되도록 해 주어야 한다.
+참고로 이 주석은 456바이트이다.
+-->
+
+
+
+
+
+

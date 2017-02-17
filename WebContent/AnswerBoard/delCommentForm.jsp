@@ -13,6 +13,7 @@
 <title>게시판</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script language="JavaScript">     
+	
 	function deleteSave(){
 		if(document.delForm.passwd.value==''){
 			alert("비밀번호를 입력하십시요.");

@@ -4,11 +4,14 @@
 <%@page import="java.util.List" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@include file="../view/color.jsp" %>
+
 <%
-	int pageSize = 3;
+	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 <%
+	request.setCharacterEncoding("utf-8");
+	
 	String pageNum = request.getParameter("pageNum");
 	String search = request.getParameter("search");
 	
@@ -36,10 +39,14 @@
 	//System.out.println(currentPage);
 	int startRow = (currentPage * 3) -2;
 	int endRow = currentPage * pageSize;
+	
 	int count = 0;
+	
 	int number = 0;
 	
+	//순서가 유지되게 하기 위해서
 	List articleList = null;
+	
 	BoardDBBean dbPro = BoardDBBean.getInstance();
 	
 	if(search.equals("") || search == null)
@@ -48,6 +55,7 @@
 		count = dbPro.getArticleCount(searchn,search);
 	
 	if(count > 0)
+	
 	{
 		if(search.equals("") || search == null)
 			articleList = dbPro.getArticles(startRow, endRow);
@@ -221,7 +229,7 @@ IP
 			else
 			{
 %>
-<a href="list.jsp?pageNum=<%=startPage + 5 %>&search=<%=search %>&searchn=<%=searchn %>">[다음]</a>
+<a href="list.jsp?pageNum=<%=startPage + 5 %>&search=<%=search %>&searchn=<%=searchn%>">[다음]</a>
 <%
 			}
 %>

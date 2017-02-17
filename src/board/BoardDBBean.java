@@ -550,8 +550,8 @@ public List getArticles(int start, int end, int n, String searchKeyword) throws 
 		conn = getConnection();
 		
 		String sql = "select num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip,readcount,r "	
-					+ "from (select num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip,readcount,rownum r "
-					+"from (select num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip,readcount "
+					+ "from (select num,writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip,readcount, rownum r "
+					+"from (select * "
 					+"from board order by ref desc, re_step asc) where "+column_name[n]+" like '%"+searchKeyword+"%' order by ref desc, re_step asc ) where r >= ? and r <= ?";
 		
 		pstmt = conn.prepareStatement(sql);
@@ -582,6 +582,7 @@ public List getArticles(int start, int end, int n, String searchKeyword) throws 
 				
 				
 				articleList.add(article);
+				
 			}while(rs.next());
 			
 		}

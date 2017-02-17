@@ -64,9 +64,11 @@ $(function(){
 	
 	try{
 			BoardDBBean dbPro=BoardDBBean.getInstance();
+			
+			//글 목록
 			BoardDataBean article=dbPro.getArticle(num);
 			
-			// 커멘트디비빈 객체를 생성
+			// 코멘트 목록
 			CommentDBBean cdb=CommentDBBean.getInstance();
 			ArrayList comments=cdb.getComments(article.getNum(),startRow, endRow);
 			
@@ -140,6 +142,7 @@ $(function(){
 						for(int i=0;i<comments.size();i++){
 						
 							CommentDataBean dbc=(CommentDataBean)comments.get(i);
+							
 							int comment_num_modify=-1;
 							
 							if(request.getParameter("modifyMode")!=null){
@@ -164,7 +167,7 @@ $(function(){
 							<%if(comment_num_modify==dbc.getComment_num()){%>
 							<a href="content1.jsp?num=<%=dbc.getContent_num()%>&pageNum=<%=pageNum%>&cPageNum=<%=request.getParameter("cPageNum")%>">[취소]</a>
 							<%} else{%>
-							<a href="delCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num() %>&p_num=<%=pageNum %>" >[삭제]</a>&nbsp;
+							<a href="delCommentForm.jsp?ctn=<%=dbc.getContent_num()%>&cmn=<%=dbc.getComment_num()%>&p_num=<%=pageNum%>">[삭제]</a>&nbsp;
 							<%} %>
 							</td>
 						</tr>	
