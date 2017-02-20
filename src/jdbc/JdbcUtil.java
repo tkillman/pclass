@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcUtil {
-
+		
+	
 	public static void close(ResultSet rs) {
 		if (rs != null) {
 			try {
@@ -33,7 +34,8 @@ public class JdbcUtil {
 			}
 		}
 	}
-
+	
+	
 	public static void rollback(Connection conn) {
 		if (conn != null) {
 			try {

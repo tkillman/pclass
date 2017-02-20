@@ -20,9 +20,9 @@
 	<meta http-equiv=Refresh content="0;url=content1.jsp?num=<%=content_num%>&pageNum=<%=pageNum %>&modifyMode=<%=comment_num%>&cPageNum=<%=cPageNum%>">
 <%}else{ %>
 	<script language="javascript">
-	<!--
+
 		alert("비밀번호가 맞지 않습니다.");
 		history.go(-1);
-	//->
+	
 	</script>
 <%} %>	

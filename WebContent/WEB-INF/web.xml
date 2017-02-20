@@ -55,7 +55,19 @@
    <exception-type>java.lang.NullPointerException</exception-type>
    <location>/Exam4/error/errorNullPointer.jsp</location>
    </error-page> -->
-
+ 
+ 
+ 
+	<servlet>
+   <servlet-name>MessageDaoProviderInit</servlet-name>
+  <servlet-class>dao.MessageDaoProviderInit</servlet-class>
+  <init-param>
+  	<param-name>dbms</param-name>
+  	<param-value>oracle</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+	</servlet>
+  
 
    <jsp-config>
    <jsp-property-group>
@@ -66,7 +78,10 @@
    </jsp-config>
    
    
-   
+   <error-page>
+   <exception-type>java.lang.NumberFormatException</exception-type>
+   <location>/guestBook/errorView.jsp</location>
+   </error-page>
    
    
 </web-app>
