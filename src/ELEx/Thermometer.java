@@ -8,6 +8,7 @@ public class Thermometer {
 	private Map<String, Double> locationCelsiusMap = 
 			new HashMap<String, Double>();
 
+	
 	public void setCelsius(String location, Double value) {
 		locationCelsiusMap.put(location, value);
 	}
@@ -15,7 +16,8 @@ public class Thermometer {
 	public Double getCelsius(String location) {
 		return locationCelsiusMap.get(location);
 	}
-//화씨
+
+	//화씨
 	public Double getFahrenheit(String location) {
 		Double celsius = getCelsius(location);
 		if (celsius == null) {
@@ -24,7 +26,10 @@ public class Thermometer {
 		return celsius.doubleValue() * 1.8 + 32.0;
 	}
 
+	
 	public String getInfo() {
 		return "온도계 변환기 1.1";
 	}
+	
+	
 }

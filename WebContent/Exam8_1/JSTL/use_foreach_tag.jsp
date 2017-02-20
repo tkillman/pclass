@@ -13,9 +13,12 @@
 <body>
 <h4>1부터 100까지 홀수의 합</h4>
 <c:set var="sum" value="0" />
+
+
 <c:forEach var="i" begin="1" end="100" step="2">
 <c:set var="sum" value="${sum + i}" />
 </c:forEach>
+
 결과 = ${sum}
 
 <h4>구구단: 4단</h4>
@@ -40,12 +43,6 @@ begin="2" end="4" varStatus="status">
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 
