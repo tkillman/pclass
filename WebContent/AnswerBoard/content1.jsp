@@ -173,7 +173,10 @@ $(function(){
 						</tr>	
 						<tr>
 						<%if(comment_num_modify==dbc.getComment_num()){%>
-						<td colspan=2><input type="text" name="comment<%=dbc.getComment_num()%>" id="comment<%=dbc.getComment_num()%>" value="<%=dbc.getCommentt()%>"><td>
+						<td colspan=2>
+						<form id="commentForm">
+						<input type="text" name="comment<%=dbc.getComment_num()%>" id="comment<%=dbc.getComment_num()%>" value="<%=dbc.getCommentt()%>"><td>
+						</form>
 						<%} else {%>
 							<td colspan=2><%=dbc.getCommentt()%></td>
 							<%}%>
