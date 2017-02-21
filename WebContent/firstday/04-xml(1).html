@@ -4,11 +4,11 @@
 		<title>xml(1)</title>
 
 		<!-- 공통 css -->
-		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
 
 		<!-- jQuery Framework 참조하기 -->
-		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
 
 		<!-- 사용자 스크립트 블록 -->
 		<script type="text/javascript">
@@ -16,7 +16,7 @@
 			$(function() {
 				$("#mybtn").click(function() {
 					$.ajax({
-						url: "ajax/xml/03.xml",
+						url: "../ajax/xml/03.xml",
 						type: "get",
 						dataType: "xml",
 						cache: false,

@@ -34,6 +34,8 @@
 	
 	if (result) {
 		// 로그인이 성공되었다면, 세션처리를 수행할 수 있습니다.
+		result=true;
+		message="로그인 성공";
 	}
 %>
 <?xml version='1.0' encoding='UTF-8'?>

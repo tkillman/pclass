@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ include file="../view/color.jsp"%>
+<%@ include file="view/color.jsp"%>
 <html>
 <head><title>로그인</title>
 <link href="style.css" rel="stylesheet" type="text/css">

@@ -1,5 +1,5 @@
 <%@ page  contentType="text/html; charset=utf-8"%>
-<%@include file="../view/color.jsp" %>
+<%@include file="view/color.jsp" %>
 <html>
 <head><title>메인입니다..</title>
 <link href="style.css" rel="stylesheet" type="text/css">

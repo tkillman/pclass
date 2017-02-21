@@ -1,7 +1,7 @@
 <%@ page contentType = "text/html; charset=utf-8" %>
 <%@ page import = "board.BoardDBBean" %>
 <%@ page import = "board.BoardDataBean" %>
-<%@ include file="../view/color.jsp"%>
+<%@ include file="view/color.jsp"%>
 <html>
 <head>
 <title>게시판</title>

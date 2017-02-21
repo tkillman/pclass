@@ -87,7 +87,7 @@
         </style>
 
         <!-- jQuery Framework 참조하기 -->
-        <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
         <!-- 사용자 스크립트 블록 -->
         <script type="text/javascript">
             $(function() {
@@ -123,15 +123,15 @@
                     $("#login .loader").show();
 
                     /** 로그인 성공 가정한 XML파일 */
-                   // var url = "ajax/login/login_ok.xml";
+                   // var url = "../ajax/login/login_ok.xml";
                     /** 로그인 실패(아이디오류)를 가정한 XML파일 */
-                    //var url = "ajax/login/login_id.xml";
+                    //var url = "../ajax/login/login_id.xml";
                     /** 로그인 실패(비밀번호 오류)를 가정한 XML파일 */
-                    //var url = "ajax/login/login_pw.xml";
+                    //var url = "../ajax/login/login_pw.xml";
                     /** 로그인처리에 대한 PHP예시 */
-                    //var url = "ajax/login/login.php";
+                    //var url = "../ajax/login/login.php";
                     /** 로그인처리에 대한 JSP예시 */
-                    var url = "ajax/login/login.jsp";
+                    var url = "../ajax/login/login.jsp";
 					
                     var se = $(this).serialize();
 					console.log(se);
@@ -151,6 +151,7 @@
                         // 결과에 따른 후속 처리
                         if (result_value) {
                             // 로그인 성공시 처리할 부분
+                            
                         } else {
                             // 로그인 실패시 처리할 부분
                         }
@@ -183,7 +184,7 @@
                 <div>
                     <input type="submit" value="로그인" />
                 </div>
-                <div class="loader"><img src="img/loader.gif" />
+                <div class="loader"><img src="../img/loader.gif" />
                 </div>
             </fieldset>
         </form>

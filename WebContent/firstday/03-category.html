@@ -5,8 +5,8 @@
    <title>category</title>
 
     <!-- 공통 css -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
 
     <style type="text/css">
       /** 빈 요소를 숨김. 각 span안에 드롭다운을 출력하게 됨 */
@@ -18,7 +18,7 @@
     </style>
 
     <!-- jQuery Framework 참조하기 -->
-    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
 
     <!-- 사용자 스크립트 블록 -->
     <script type="text/javascript">
@@ -27,7 +27,7 @@
      $(function() {
     	 
         // 기본적으로 1depth의 드롭다운을 로드함
-        $("#category1").load("ajax/text/category-data.html #category1-1", function() {
+        $("#category1").load("../ajax/text/category-data.html #category1-1", function() {
           // 로딩이 완료되면 드롭다운을 감싸는 태그 요소를 화면에 표시함
         
           $(this).show();
@@ -44,7 +44,7 @@
 
           // 선택된 항목이 지시하는 하위 카테고리 페이지의 URL얻기
           var target = $(this).find("option:selected").attr("data-target");
-          var selector = "ajax/text/category-data.html " + target;
+          var selector = "../ajax/text/category-data.html " + target;
 
           
           // 다음 항목 로드
@@ -63,7 +63,7 @@
           // 선택된 항목이 지시하는 하위 카테고리 페이지의 URL얻기
           
           var target = $(this).find("option:selected").attr("data-target");
-          var selector = "ajax/text/category-data.html " + target;
+          var selector = "../ajax/text/category-data.html " + target;
           
           
           $("#category3").load(selector, function() {
@@ -78,7 +78,7 @@
         // 3depth에 대한 change 이벤트 정의
        
         $(document).on("change", "#category3 > select", function() {
-          // 선택항목이 존재한다면?
+          // 선택항목이 존재한다면?	
           if ($(this).find("option:selected").index() > 0) {
             // 모든 드롭다운의 선택값을 추출
             var data1 = $("#category1 > select > option:selected").val();

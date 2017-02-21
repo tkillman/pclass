@@ -1,5 +1,5 @@
-***CHAP18 ÀÚ·á½Ç ±¸Çö***
-1. Util/Connection Å¬·¡½º
+***CHAP18 ìë£Œì‹¤ êµ¬í˜„***
+1. Util/Connection í´ë˜ìŠ¤
 [JdbcUtil.java]
 package jdbc;
 
@@ -61,8 +61,8 @@ public class ConnectionProvider {
 	}
 }
 
-2. ¿À¶óÅ¬¿ëÀ¸·Î Å×ÀÌºí »ı¼º
-[Table »ı¼º]
+2. ì˜¤ë¼í´ìš©ìœ¼ë¡œ í…Œì´ë¸” ìƒì„±
+[Table ìƒì„±]
 create table pds_item (
 	pds_item_id number not null,
 	filename varchar2(200) not null,
@@ -75,7 +75,7 @@ create table pds_item (
 
 create sequence pds_item_id_seq;
 
-3. ÀÚ¹Ù ºó
+3. ìë°” ë¹ˆ
 [PdsItem.java]
 package pds.model;
 
@@ -178,7 +178,7 @@ public class AddRequest {
 
 }
 
-[PdsItemListModel.java] : ÆäÀÌÂ¡À» À§ÇÑ ÀÚ¹Ùºó.
+[PdsItemListModel.java] : í˜ì´ì§•ì„ ìœ„í•œ ìë°”ë¹ˆ.
 package pds.model;
 
 import java.util.ArrayList;
@@ -371,7 +371,7 @@ public class PdsItemDao {
 	
 }
 
-5. ÆÄÀÏ ¾÷·Îµå
+5. íŒŒì¼ ì—…ë¡œë“œ
 [FileSaveHelper.java]
 package pds.file;
 
@@ -410,7 +410,7 @@ public class FileSaveHelper {
 	}
 }
 
-6.ÆÄÀÏ ´Ù¿î·Îµå
+6.íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 [FileDownloadHelper.java]
 package pds.file;
 
@@ -440,7 +440,7 @@ public class FileDownloadHelper {
 	}
 }
 
-7.Service Å¬·¡½º
+7.Service í´ë˜ìŠ¤
 [AddPdsItemService.java]
 package pds.service;
 
@@ -473,7 +473,7 @@ public class AddPdsItemService {
 			int id = PdsItemDao.getInstance().insert(conn, pdsItem);
 			if (id == -1) {
 				JdbcUtil.rollback(conn);
-				throw new RuntimeException("DB »ğÀÔ ¾È µÊ");
+				throw new RuntimeException("DB ì‚½ì… ì•ˆ ë¨");
 			}
 			pdsItem.setId(id);
 			
@@ -551,7 +551,7 @@ public class ListPdsItemService {
 					PdsItemList, pageNumber, totalPageCount, firstRow, endRow);
 			return PdsItemListView;
 		} catch (SQLException e) {
-			throw new RuntimeException("DB ¿¡·¯ ¹ß»ı:" + e.getMessage(), e);
+			throw new RuntimeException("DB ì—ëŸ¬ ë°œìƒ:" + e.getMessage(), e);
 		} finally {
 			JdbcUtil.close(conn);
 		}
@@ -597,11 +597,11 @@ public class GetPdsItemService {
 			conn = ConnectionProvider.getConnection();
 			PdsItem pdsItem = PdsItemDao.getInstance().selectById(conn, id);
 			if (pdsItem == null) {
-				throw new PdsItemNotFoundException("Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù:" + id);
+				throw new PdsItemNotFoundException("ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤:" + id);
 			}
 			return pdsItem;
 		} catch (SQLException e) {
-			throw new RuntimeException("DB Ã³¸® ¿¡·¯ ¹ß»ı: " + e.getMessage(), e);
+			throw new RuntimeException("DB ì²˜ë¦¬ ì—ëŸ¬ ë°œìƒ: " + e.getMessage(), e);
 		} finally {
 			JdbcUtil.close(conn);
 		}
@@ -645,7 +645,7 @@ public class IncreaseDownloadCountService {
 			int updatedCount = PdsItemDao.getInstance().increaseCount(conn, id);
 			return updatedCount == 0 ? false : true;
 		} catch (SQLException e) {
-			throw new RuntimeException("DB Ã³¸® ¿¡·¯ ¹ß»ı: " + e.getMessage(), e);
+			throw new RuntimeException("DB ì²˜ë¦¬ ì—ëŸ¬ ë°œìƒ: " + e.getMessage(), e);
 		} finally {
 			JdbcUtil.close(conn);
 		}
@@ -657,12 +657,12 @@ public class IncreaseDownloadCountService {
 [uploadForm.jsp]
 <%@ page contentType="text/html; charset=utf-8" %>
 <html>
-<head><title>ÆÄÀÏ µî·Ï</title></head>
+<head><title>íŒŒì¼ ë“±ë¡</title></head>
 <body>
 <form action="upload.jsp" method="post" enctype="multipart/form-data">
-ÆÄÀÏ: <input type="file" name="file" /> <br/>
-¼³¸í: <input type="text" name="description" /> <br/>
-<input type="submit" value="¾÷·Îµå" />
+íŒŒì¼: <input type="file" name="file" /> <br/>
+ì„¤ëª…: <input type="text" name="description" /> <br/>
+<input type="submit" value="ì—…ë¡œë“œ" />
 </form>
 </body>
 </html>
@@ -715,11 +715,11 @@ public class IncreaseDownloadCountService {
 	PdsItem pdsItem = AddPdsItemService.getInstance().add(addRequest);
 %>
 <html>
-<head><title>¾÷·Îµå ¼º°ø</title></head>
+<head><title>ì—…ë¡œë“œ ì„±ê³µ</title></head>
 <body>
-<%= pdsItem.getFileName() %> ÆÄÀÏÀ» ¾÷·Îµå Çß½À´Ï´Ù.
+<%= pdsItem.getFileName() %> íŒŒì¼ì„ ì—…ë¡œë“œ í–ˆìŠµë‹ˆë‹¤.
 <br/>
-<a href="list.jsp">¸ñ·Ïº¸±â</a>
+<a href="list.jsp">ëª©ë¡ë³´ê¸°</a>
 </body>
 </html>
 
@@ -759,7 +759,7 @@ public class IncreaseDownloadCountService {
 	response.setDateHeader("Expires", 1L);
 %>
 <html>
-<head><title>ÀÚ·á½Ç ¸ñ·Ï</title></head>
+<head><title>ìë£Œì‹¤ ëª©ë¡</title></head>
 <body>
 <table border="1">
 	<c:if test="${listModel.totalPageCount > 0}">
@@ -772,18 +772,18 @@ public class IncreaseDownloadCountService {
 	</c:if>
 	
 	<tr>
-		<td>¹øÈ£</td>
-		<td>ÆÄÀÏ¸í</td>
-		<td>ÆÄÀÏÅ©±â</td>
-		<td>´Ù¿î·ÎµåÈ¸¼ö</td>
-		<td>´Ù¿î·Îµå</td>
+		<td>ë²ˆí˜¸</td>
+		<td>íŒŒì¼ëª…</td>
+		<td>íŒŒì¼í¬ê¸°</td>
+		<td>ë‹¤ìš´ë¡œë“œíšŒìˆ˜</td>
+		<td>ë‹¤ìš´ë¡œë“œ</td>
 	</tr>
 	
 <c:choose>
 	<c:when test="${listModel.hasPdsItem == false}">
 	<tr>
 		<td colspan="5">
-			°Ô½Ã±ÛÀÌ ¾ø½À´Ï´Ù.
+			ê²Œì‹œê¸€ì´ ì—†ìŠµë‹ˆë‹¤.
 		</td>
 	</tr>
 	</c:when>
@@ -794,20 +794,20 @@ public class IncreaseDownloadCountService {
 		<td>${item.fileName}</td>
 		<td>${item.fileSize}</td>
 		<td>${item.downloadCount}</td>
-		<td><a href="download.jsp?id=${item.id}">´Ù¿î¹Ş±â</a></td>
+		<td><a href="download.jsp?id=${item.id}">ë‹¤ìš´ë°›ê¸°</a></td>
 	</tr>
 	</c:forEach>
 	<tr>
 		<td colspan="5">
 		
 		<c:if test="${beginPage > 10}">
-			<a href="list.jsp?p=${beginPage-1}">ÀÌÀü</a>
+			<a href="list.jsp?p=${beginPage-1}">ì´ì „</a>
 		</c:if>
 		<c:forEach var="pno" begin="${beginPage}" end="${endPage}">
 		<a href="list.jsp?p=${pno}">[${pno}]</a>
 		</c:forEach>
 		<c:if test="${endPage < listModel.totalPageCount}">
-			<a href="list.jsp?p=${endPage + 1}">´ÙÀ½</a>
+			<a href="list.jsp?p=${endPage + 1}">ë‹¤ìŒ</a>
 		</c:if>
 		</td>
 	</tr>
@@ -816,7 +816,7 @@ public class IncreaseDownloadCountService {
 	
 	<tr>
 		<td colspan="5">
-			<a href="uploadForm.jsp">ÆÄÀÏ Ã·ºÎ</a>
+			<a href="uploadForm.jsp">íŒŒì¼ ì²¨ë¶€</a>
 		</td>
 	</tr>	
 </table>
@@ -837,7 +837,7 @@ public class IncreaseDownloadCountService {
 	try {
 		PdsItem item = GetPdsItemService.getInstance().getPdsItem(id);
 
-		// ÀÀ´ä Çì´õ ´Ù¿î·Îµå·Î ¼³Á¤
+		// ì‘ë‹µ í—¤ë” ë‹¤ìš´ë¡œë“œë¡œ ì„¤ì •
 		response.reset();
 		
 		String fileName = new String(item.getFileName().getBytes("utf-8"), 

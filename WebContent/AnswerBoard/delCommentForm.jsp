@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ include file="../view/color.jsp" %>
+<%@ include file="view/color.jsp" %>
 <%
 
 	String comment_num=request.getParameter("cmn");

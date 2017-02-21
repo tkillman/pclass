@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ page import = "logon.*" %>
-<%@ include file="../view/color.jsp"%>
+<%@ include file="view/color.jsp"%>
 
 <html>
 <head>

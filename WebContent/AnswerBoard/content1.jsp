@@ -5,7 +5,7 @@
 <%@ page import="board.CommentDataBean" %> 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ include file="../view/color.jsp" %>
+<%@ include file="view/color.jsp" %>
 <html>
 <head>
 <title>게시판</title>

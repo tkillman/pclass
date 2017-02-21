@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
 
 		<!-- jQuery Framework 참조하기 -->
-		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
 
 		<!-- 사용자 스크립트 블록 -->
 		<script type="text/javascript">
@@ -28,11 +28,11 @@
 					
 					/** 데이터파일의 URL설정 */
 					// 실습용 URL - 아이디중복되지 않음
-					//var url = "ajax/idcheck/idcheck_ok.xml";
+					//var url = "../ajax/idcheck/idcheck_ok.xml";
 					// 실습용 URL - 아이디중복됨
-					// var url = "ajax/idcheck/idcheck_fail.xml";
+					// var url = "../ajax/idcheck/idcheck_fail.xml";
 					// 웹 프로그래밍 연동 (JSP)
-					 var url = "ajax/idcheck/idcheck.jsp";
+					 var url = "../ajax/idcheck/idcheck.jsp";
 
 					/** get방식 ajax 연동 */
 					$.get(url, {

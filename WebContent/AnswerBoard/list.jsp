@@ -3,11 +3,12 @@
 <%@page import="board.BoardDataBean" %>
 <%@page import="java.util.List" %>
 <%@page import="java.text.SimpleDateFormat" %>
-<%@include file="../view/color.jsp" %>
+<%@include file="view/color.jsp" %>
 
 <%
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
 %>
 <%
 	request.setCharacterEncoding("utf-8");

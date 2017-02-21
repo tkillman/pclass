@@ -71,17 +71,17 @@
 
    <jsp-config>
    <jsp-property-group>
-   <url-pattern>/Exam3/view/*</url-pattern>
-   <include-prelude>/Exam3/common/variable.jspf</include-prelude>
-   <include-coda>/Exam3/common/footer.jspf</include-coda>
+   <url-pattern>/jsp/Exam3/view/*</url-pattern>
+   <include-prelude>/jsp/Exam3/common/variable.jspf</include-prelude>
+   <include-coda>/jsp/Exam3/common/footer.jspf</include-coda>
    </jsp-property-group>
    </jsp-config>
    
    
-   <error-page>
+  <!--  <error-page>
    <exception-type>java.lang.NumberFormatException</exception-type>
    <location>/guestBook/errorView.jsp</location>
    </error-page>
-   
+   --> 
    
 </web-app>

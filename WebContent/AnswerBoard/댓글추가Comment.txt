@@ -12,6 +12,10 @@ create table reply_comment(
 	comment_num number not null 		-- 댓글의 글번호	
 )
 
+-----------------------------------------------------
+
+
+
 2. JavaBean
 [CommentDataBean.java]
 package board;
