@@ -3,8 +3,10 @@
 <%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+
 	Member member = new Member();
 	HashMap<String, String> pref = new HashMap<String, String>();
+
 %>
 <html>
 <body>

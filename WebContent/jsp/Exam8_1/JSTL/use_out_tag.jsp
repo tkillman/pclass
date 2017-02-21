@@ -6,10 +6,19 @@
 <body>
 
 <%
+	
+	request.setCharacterEncoding("utf-8");	
+
 	FileReader reader = null;
+	
 	try {
+		
 		String path = request.getParameter("path");
 		reader = new FileReader(getServletContext().getRealPath(path));
+		
+		// application 기본 객체 getServletContext() 메소드
+		
+		
 %>
 <pre>
 소스 코드 = <%= path %>

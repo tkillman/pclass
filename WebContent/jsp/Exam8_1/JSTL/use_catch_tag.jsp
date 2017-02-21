@@ -4,6 +4,7 @@
 <head><title>catch 태그</title></head>
 <body>
 
+
 <c:catch var="ex">
 name 파라미터의 값 = <%= request.getParameter("name") %><br>
 <%  if (request.getParameter("name").equals("test")) {  %>

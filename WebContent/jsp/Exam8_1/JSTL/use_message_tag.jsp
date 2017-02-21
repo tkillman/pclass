@@ -4,7 +4,9 @@
 
 
 <fmt:setLocale value="en" />
-<fmt:bundle basename="resource.message" >
+<%// <fmt:bundle basename="resource.message" > %>
+
+
 <fmt:message key="TITLE" var="title"/>
 <html>
 <head><title>${title}</title></head>
@@ -20,4 +22,4 @@
 
 </body>
 </html>
-</fmt:bundle>
+<%// </fmt:bundle>%>

@@ -5,6 +5,7 @@
 <head><title>numberFormat 태그 사용</title></head>
 <body>
 
+
 <c:set var="price" value="10000" />
 <fmt:formatNumber value="${price}" type="number" var="numberType" />
 <br/>

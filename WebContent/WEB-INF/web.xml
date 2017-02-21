@@ -18,12 +18,30 @@
   <param-value>값</param-value>
   </context-param>
   
+
+	<context-param>
+	<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+	<param-value>resource.message</param-value>
+	</context-param>
   
   <context-param>
   <param-name>checkLevel</param-name>
   <param-value>5</param-value>
   </context-param>
   
+  
+  <context-param>
+  <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+  <param-value>ko_kr</param-value>
+  </context-param>
+  <!-- 한글로 보여주겠다. -->
+  
+  <context-param>
+  <param-name>javax.servlet.jsp.jstl.fmt.timeZone</param-name> 
+  <param-value>Asia/Seoul</param-value>
+  </context-param>
+  
+  <!-- 지역을 한국으로 설정하겠다. -->
   
   <!-- load-on-startup의 뜻은 서버가 시작할 때 1번 실행해라. -->
   
