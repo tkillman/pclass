@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.InputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
@@ -9,10 +10,10 @@
 <body>
 
 <%
+
  request.setCharacterEncoding("utf-8");
 
-InputStreamReader is =null;
-
+ InputStreamReader is =null;
 
 try{
 	
@@ -21,16 +22,11 @@ try{
 	char[] bytebuf = new char[100];
 	int len = -1;
 	
-	
-	
 	while((len =is.read(bytebuf)) !=-1){
 		
-		out.print(new String(bytebuf,0,len));
+		out.print(URLDecoder.decode(new String(bytebuf,0,len), "utf-8") );
 		
 	}
-	
-	
-	
 	
 }catch(Exception e){
 	
@@ -38,9 +34,6 @@ try{
 
 
 %>
-
-
-
 
 </body>
 </html>
