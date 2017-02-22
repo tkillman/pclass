@@ -7,13 +7,16 @@
 <%@ include file="view/color.jsp"%>
 
 <%
+
 String realPath = "";
 String savePath = "fileSave";
 String type = "utf-8";
-int maxSize = 5*1024*1024;//5M
+
+int maxSize = 5*1024*1024;//5M , -1이면 제한이 없다.
 
 ServletContext context = getServletContext();
 realPath = context.getRealPath(savePath);
+
 ArrayList saveFiles = new ArrayList();
 ArrayList origFiles = new ArrayList();
 
@@ -31,10 +34,13 @@ try
 	content = multi.getParameter("txtAbstract");
 
 	Enumeration files = multi.getFileNames();
+	
 	while(files.hasMoreElements()){
+		
 	   String name = (String)files.nextElement();
 	   saveFiles.add(multi.getFilesystemName(name));
 	   origFiles.add(multi.getOriginalFileName(name));
+	   
 	}
 %>
 <html>
@@ -60,14 +66,18 @@ try
 <tr>
 	<td colspan="4"><strong>업로드된 파일 리스트</strong></td>
 </tr>
-<%for(int i=0; i<saveFiles.size();i++){%>
+<%for(int i=0; i<saveFiles.size();i++){ //저장된 파일 갯수 %>
 <tr >
 	<td colspan="4">
 	<%
+	
 	String y=(String)saveFiles.get(i);
-	String x=request.getContextPath()+"/"+savePath+"/"+URLEncoder.encode(y,"UTF-8");
+	String x=request.getContextPath() +"/"+savePath+"/"+ URLEncoder.encode(y,"UTF-8");
+	out.println(x);
+	
 	%>
-	<%=i+1%>.<a href="<%=x%>" ><strong><%=origFiles.get(i)%></strong></a>
+	<%=i+1%>.<a href="<%=x%>" download><strong><%=origFiles.get(i)%></strong></a>
+	<!-- download를 걸어주면 보여줄 수 있는 것도 다운로드 시켜줄 수 있도록 해준다. -->
 	</td>
 </tr>
 <%}%>

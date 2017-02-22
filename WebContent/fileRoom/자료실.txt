@@ -1,4 +1,5 @@
 ***CHAP18 자료실 구현***
+
 1. Util/Connection 클래스
 [JdbcUtil.java]
 package jdbc;
@@ -77,6 +78,7 @@ create sequence pds_item_id_seq;
 
 3. 자바 빈
 [PdsItem.java]
+
 package pds.model;
 
 public class PdsItem {

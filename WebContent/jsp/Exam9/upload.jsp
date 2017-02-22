@@ -16,6 +16,9 @@
 </form>
 
 
+
+
+
 <p><b>multipart/form 데이터 방식</b>
 <form action="uploadData.jsp" method="post" enctype="multipart/form-data">
 이름 : <input type="text" name="name"><br>
@@ -25,14 +28,3 @@
 </form>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

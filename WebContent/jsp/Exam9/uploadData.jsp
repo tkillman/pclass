@@ -16,6 +16,7 @@ out.println("]");
 <br>
 <% 
 
+
 try{
 	
 	is=request.getInputStream();
@@ -25,7 +26,9 @@ try{
 	}
 	
 }finally{
+
 	if(is !=null)try{is.close();}catch(IOException ex){}
+
 }
  %>
 </body>
