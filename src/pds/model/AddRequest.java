@@ -42,12 +42,14 @@ public class AddRequest {
 
 	//PdsItem 처리
 	public PdsItem toPdsItem() {
+		
 		PdsItem item = new PdsItem();
 		item.setFileName(fileName);
 		item.setFileSize(fileSize);
 		item.setRealPath(realPath);
 		item.setDescription(description);
 		return item;
+		
 	}
 
 }

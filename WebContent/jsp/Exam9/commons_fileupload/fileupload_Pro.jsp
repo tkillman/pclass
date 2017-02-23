@@ -77,7 +77,9 @@
 			}
 		}
 	} else {
+		
 		// multipart/form 아님
+		
 		
 %>
 multipart/form 요청이 아님.

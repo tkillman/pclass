@@ -20,6 +20,7 @@ ServletContext context = getServletContext();
 
 //현재 jsp페이지의 웹 어플리케이션상의 절대 경로를 구한다.
 
+
 realFolder = context.getRealPath(saveFolder);  
 out.println("the realpath is : " + realFolder+"<br>");
 

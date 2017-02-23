@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ include file="view/color.jsp"%>
+<%@ include file="../view/color.jsp"%>
 <%! 
 
 	public String getParam(HttpServletRequest request, String paramName){

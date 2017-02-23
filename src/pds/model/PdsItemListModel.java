@@ -17,13 +17,14 @@ public class PdsItemListModel {
 	}
 	
 	
-	public PdsItemListModel(List<PdsItem> PdsItemList, int requestPageNumber,
-			int totalPageCount, int startRow, int endRow) {
+	public PdsItemListModel(List<PdsItem> PdsItemList, int requestPageNumber, int totalPageCount, int startRow, int endRow) {
+		
 		this.pdsItemList = PdsItemList;
 		this.requestPage = requestPageNumber;
 		this.totalPageCount = totalPageCount;
 		this.startRow = startRow;
 		this.endRow = endRow;
+		
 	}
 
 	

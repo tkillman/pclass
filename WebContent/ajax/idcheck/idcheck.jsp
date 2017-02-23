@@ -3,15 +3,19 @@
 <%
 	String user_id = request.getParameter("user_id");
 	
+	
 	if (user_id == null) {
 		user_id = "";
 	}
+	
 	
 	// 데이터베이스 연동을 통한 아이디 중복검사 결과를 얻어오는 과정에 대한 가정
 	boolean result = false;
 	if (user_id.equals("jquery")) {
 		result = true;
 	}
+	
+	
 %>
 <?xml version='1.0' encoding='UTF-8'?>
 <id_check>

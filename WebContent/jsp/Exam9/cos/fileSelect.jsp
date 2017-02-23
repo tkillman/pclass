@@ -6,8 +6,7 @@
 </head>
 
 <body>
-<form name="fileForm" method="post" enctype="multipart/form-data" 
-action="fileUpload.jsp">
+<form name="fileForm" method="post" enctype="multipart/form-data" action="fileUpload.jsp">
 	작성자: 
 	<input type="text" name="user"><br>
 	제  목: 

@@ -1,7 +1,8 @@
-ï»¿<html>
+<html>
 
 <head>
     <script>
+    
         function calc(type) {
             x = Number(document.calculator.number1.value);
             if (type == 1)
@@ -15,13 +16,14 @@
                 y = Math.abs(x);
             document.calculator.total.value = y;
         }
+        
     </script>
 </head>
 
 <body>
     <form name="calculator">
-        ìž…ë ¥:               <input type="text" name="number1"><br />
-        ê³„ì‚° ê²°ê³¼:          <input type="text" name="total"><br />
+        ÀÔ·Â:               <input type="text" name="number1"><br />
+        °è»ê °á°ú:          <input type="text" name="total"><br />
         <input type="button" value="SIN" onclick="calc(1);">
         <input type="button" value="LOG" onclick="calc(2);">
         <input type="button" value="SQRT" onclick="calc(3);">

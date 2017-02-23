@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<%=request.getParameter("irum") %>
 
+<%=request.getParameter("irum") %>
 
 
 </body>

@@ -51,7 +51,7 @@ public class ListPdsItemService {
 			//전체 있어야 할 페이지 수 
 			int totalPageCount = calculateTotalPageCount(totalArticleCount);
 
-			//계산된 페이지 수
+			//계산해서 보여줄 글 번호들
 			int firstRow = (pageNumber - 1) * COUNT_PER_PAGE + 1;
 			int endRow = firstRow + COUNT_PER_PAGE - 1;
 
@@ -78,13 +78,18 @@ public class ListPdsItemService {
 
 	
 	private int calculateTotalPageCount(int totalPdsItemCount) {
+		
 		if (totalPdsItemCount == 0) {
 			return 0;
 		}
+		
 		int pageCount = totalPdsItemCount / COUNT_PER_PAGE;
+		
 		if (totalPdsItemCount % COUNT_PER_PAGE > 0) {
 			pageCount++;
 		}
 		return pageCount;
+		
 	}
+	
 }

@@ -2,34 +2,34 @@
 <html lang="ko">
 	<head>
 	<meta charset="utf-8">
-		<title>text(2)</title>
+		<title>text(1)</title>
 
+		
 		<!-- 공통 css -->
-		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
 
 		<!-- jQuery Framework 참조하기 -->
-		<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.11.0.min.js"></script>
 
 		<!-- 사용자 스크립트 블록 -->
 		<script type="text/javascript">
-		
-		
-		var url="../ajax/text/02.txt";
 			$(function() {
+				// 버튼의 클릭 이벤트
 				$("#mybtn").click(function() {
 					$.ajax({
-						url : url,
+						url : "../../ajax/text/01.txt",
 						type : "get",
 						dataType : "text",
 						timeout : 30000,
 						cache : false,
+						/** 파일 읽기에 성공한 경우 */
 						success : function(data) {
-							// dataType값이 text일 경우에는 단순히 내용에 대한 문자열임
-							$("#result").append(data);
+							// dataType값이 text일 경우에는 단순히 내용에 대한 문자열이므로, 직접 HTML요소에 출력할 수 있다.
+							$("#result").html(data);
 						},
+						/** 파일 읽기에 실패한 경우 (주소 오타, 웹서버 중지 등) */
 						error : function(xhr, textStatus, errorThrown) {
-							// 읽으려는 대상 주소가 잘못된 경우에 사용됩니다.
 							$("div").html("<div>" + textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")</div>");
 						}
 					});
@@ -39,7 +39,7 @@
 
 	</head>
 	<body>
-		<h1 class="title">$.ajax() 함수를 사용한 HTML소스 읽기</h1>
+		<h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
 		<div class="exec">
 			<input type="button" value="txt파일 가져오기" id="mybtn" />
 		</div>

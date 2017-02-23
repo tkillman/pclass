@@ -9,6 +9,7 @@
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <%
+
 	// 요청 타입이 multipart/form-data 인가? 맞으면 true 아니면 false
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
@@ -45,12 +46,14 @@
 			
 			String name = item.getFieldName();
 			if (name.equals("file")) { // input 태그 네임이  file
+				
 				String realPath = FileSaveHelper.save("c:\\Java\\pds", item.getInputStream());
 				System.out.println(realPath);
 				
 				addRequest.setFileName(item.getName()); //파일의 원본 이름
 				addRequest.setFileSize(item.getSize()); //파일 크기
 				addRequest.setRealPath(realPath); //파일의 경로
+				
 			}
 		}
 	}

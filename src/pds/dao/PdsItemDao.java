@@ -1,5 +1,6 @@
 package pds.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import pds.model.PdsItem;
+import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
 
 public class PdsItemDao {
@@ -67,7 +69,9 @@ public class PdsItemDao {
 		}
 	}
 	
+	
 	private PdsItem makeItemFromResultSet(ResultSet rs) throws SQLException {
+		
 		PdsItem item = new PdsItem();
 		item.setId(rs.getInt("pds_item_id"));
 		item.setFileName(rs.getString("filename"));
@@ -76,21 +80,27 @@ public class PdsItemDao {
 		item.setDownloadCount(rs.getInt("downloadcount"));
 		item.setDescription(rs.getString("description"));
 		return item;
+		
+		
 	}
 
+	
 	public PdsItem selectById(Connection conn, int itemId) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
-			pstmt = conn.prepareStatement("select * from pds_item "
-					+ "where pds_item_id = ?");
+			pstmt = conn.prepareStatement("select * from pds_item " + "where pds_item_id = ?");
 			pstmt.setInt(1, itemId);
 			rs = pstmt.executeQuery();
+			
 			if (!rs.next()) {
 				return null;
 			}
+			
 			PdsItem item = makeItemFromResultSet(rs);
 			return item;
+			
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
@@ -143,7 +153,7 @@ public class PdsItemDao {
 		}
 	}
 
-	
+	//클릭 조회수 설정
 	public int increaseCount(Connection conn, int id) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
@@ -156,5 +166,113 @@ public class PdsItemDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	// 삭제 메소드
+	public int deletePdsItem(String id){
+		
+		int resultNum = -1;
+		int idNum = Integer.parseInt(id);
+		
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = ConnectionProvider.getConnection();
+			String sql = "select realpath from pds_item where pds_item_id = ?";
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, idNum);
+			resultSet = pstmt.executeQuery();
+			
+			
+			if(resultSet.next()){ //디비에서 검색 결과가 있다면 
+				//파일 삭제
+				File file = new File(resultSet.getString("realpath"));
+				boolean resultBoolean = file.delete();
+				
+				if(resultBoolean){
+					//System.out.println("경로 파일 삭제");
+					
+					sql = "delete from pds_item where pds_item_id = ? ";
+					pstmt = connection.prepareStatement(sql);
+					pstmt.setInt(1, idNum);
+					resultNum = pstmt.executeUpdate();
+					
+					if(resultNum ==1){
+						//System.out.println("디비에서 삭제 완료");
+					}
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return resultNum;
+		
+	}
+	
+	// check 된 아이들 모두 삭제 메소드
+	public int deletePdsItem(String[] ids){
+		
+		int resultNum = -1;
+		
+		for(int i=0;i<ids.length;i++){
+		
+		String id = ids[i];
+		//System.out.println(id);
+		int idNum = Integer.parseInt(id);
+			
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = ConnectionProvider.getConnection();
+			
+			String sql = "select realpath from pds_item where pds_item_id = ?";
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, idNum);
+			resultSet = pstmt.executeQuery();
+			
+			
+			if(resultSet.next()){ //디비에서 검색 결과가 있다면 
+				//파일 삭제
+				File file = new File(resultSet.getString("realpath"));
+				
+				boolean resultBoolean = file.delete();
+				
+				if(resultBoolean){
+					//System.out.println("경로 파일 삭제");
+					
+					sql = "delete from pds_item where pds_item_id = ? ";
+					pstmt = connection.prepareStatement(sql);
+					pstmt.setInt(1, idNum);
+					resultNum = pstmt.executeUpdate();
+					
+					
+					if(resultNum ==1){
+						//System.out.println("디비에서 삭제 완료");
+					}
+					
+					
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		}//for문 종료
+		
+		return resultNum;
+		
+	}
+	
+	
 	
 }
