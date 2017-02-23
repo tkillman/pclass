@@ -6,6 +6,7 @@
 </head>
 <body>
 
+
 <form action="uploadData_m.jsp" method="post">
 <input type="file" name="file"> 
 <input type="submit" value="제출">
