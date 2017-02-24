@@ -98,6 +98,7 @@
 
 20). 아래와 같은 명령행으로 프로그램을 실행하였을 때 결과는 무엇인가? 
      C:\> java TestJava 123
+    
      public class TestJava {
            public static void main(String args[]) {
                   System.out.println(args[1]);
@@ -106,8 +107,11 @@
 
 
 21). 다음 프로그램의 컴파일 결과를 예상하라. 
+     
      class Test {
+            
               static int a = 1;
+              
               public static void main(String[] args) {
                         int a;
                         System.out.println(a);
@@ -117,14 +121,16 @@
 
 22). 다음 프로그램에서 메소드 add()의 기능은 무엇인가? 출력 결과는 무엇인가? 
     class Test {
+         
          public static void main(String args[]) {
           int [] x={0, '0', 'A', 'a'};
             System.out.println(add(x));
          }
+         
          public static int add(int arr[]) {
             int x = -1;
             for ( int i = 0; i < arr.length; i ++)
-                  x= x < arr[i] ? arr[i] : x;
+                  x = x < arr[i] ? arr[i] : x;
             return x;
         }  
     }
@@ -152,8 +158,10 @@
 
 
 25). 다음 프로그램은 컴파일되지 않는다. 이유는 무엇인가? 
+   
    public class Fred {
        public int x = 0;
+       
        public fred (int x) {
            this.x = x;
        }
@@ -177,6 +185,7 @@
 27). 다음 프로그램의 문제점은 무엇인가?
    protected class Fred {
           private int x = 0;
+         
           private Fred (int xval) {
                x=xval;
           }
@@ -193,14 +202,16 @@
 29). 다음 프로그램의 실행 결과는 무엇인가? 
    class Test {
          int x;
-         public Test(int x) {
+        
+        public Test(int x) {
 		this.x = x; 
 	}
    }
+   
    public class Example {
          public static void main(String args[]) {
                 Test x1 = new Test(10);
-        	       Test x2 = new Test(10);
+        	    Test x2 = new Test(10);
                 method(x1, x2);
                 System.out.println(x1.x + ", " + x2.x);
          }
@@ -209,6 +220,7 @@
                 v1=v2; 
          }
    }
+   
 30). 생성자에서 자신의 생성자를 호출 하는 명령어와 조상클래스 의 생성자를 호출하는 명령어 와 주의점 을 쓰시오...
 
 
@@ -254,12 +266,16 @@ public class Poliymorphism {
 		po.f();
 	}
 }
+
 class Derived extends Poliymorphism {
 	public void f() {
 		System.out.println("sub class");
 	}
 }
+
+
 34) 아래 프로그램 출력 결과를 적으시오.
+
 public class OperatorTest {
 	public static void main(String[] argv) {
 		int a = 10;
@@ -271,6 +287,7 @@ public class OperatorTest {
 		}
 	}
 }
+
 
 35) 자바 데이터 타입에 대한 설명 중 틀린 것을 고르시오.
 ① String 타입은 객체형이다.
@@ -302,6 +319,7 @@ C. 접근 제어자는 조상의 메서드보다 좁은 범위로만 변경할 �
 D. 조상의 메서드보다 더 많은 수의 예외를 선언할 수 있다. 
 
 -- 39. 다음 중 아래 add메서드를 잘못 오버로딩 한 것은? 
+
 long add(int a, int b) { return a+b;}
 
 A. long add(int x, int y) { return x+y;} 
@@ -395,12 +413,6 @@ public class AutoBoxing {
 
 
 50). Single Instance 클래스 구조를 작성하시오.
-
-
-
-
-
-
 
 
 

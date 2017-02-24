@@ -1,5 +1,22 @@
 ***CHAP18 자료실 구현***
 
+2. 오라클용으로 테이블 생성
+[Table 생성]
+create table pds_item (
+	pds_item_id number not null,
+	filename varchar2(200) not null,
+	realpath varchar2(200) not null,
+	filesize number,
+	downloadcount number default 0,
+	description varchar2(255),
+	constraint pds_item_id_pk primary key (pds_item_id)
+);
+
+create sequence pds_item_id_seq;
+
+
+
+
 1. Util/Connection 클래스
 [JdbcUtil.java]
 package jdbc;
@@ -61,20 +78,6 @@ public class ConnectionProvider {
 		return DriverManager.getConnection("jdbc:apache:commons:dbcp:pool");
 	}
 }
-
-2. 오라클용으로 테이블 생성
-[Table 생성]
-create table pds_item (
-	pds_item_id number not null,
-	filename varchar2(200) not null,
-	realpath varchar2(200) not null,
-	filesize number,
-	downloadcount number default 0,
-	description varchar2(255),
-	constraint pds_item_id_pk primary key (pds_item_id)
-);
-
-create sequence pds_item_id_seq;
 
 3. 자바 빈
 [PdsItem.java]

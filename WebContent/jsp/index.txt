@@ -1,0 +1,32 @@
+------------------------------------------------------
+이수진 강사님 JSP 강좌 목차
+1. 웹 어플리케이션 기초 -> jsp 사용 이유
+2. java 설정
+3. page 디렉티브, 스크립트, request,response 
+4. java 기초 문법, Exam1
+5. jsp 처리과정, buffer, Exam2
+6. jsp 기본 객체와 영역(page,request,session,application)
+7. 페이지 모듈화 
+<jsp:include> , Exam3
+<jsp:forward> , Exam3
+8. 에러처리, Exam4
+9. 쿠키 , Exam5
+10. 세션, Exam5
+11. <jsp:uesBean> , Exam6
+12. 데이터 베이스 기초 ,Exam7
+13. Dao, Dto 기본 구조, Exam8
+14. 이클립스 환경 설정
+15. EL(Expression Language), Exam8_1
+16. JSTL(jsp standard tag library), Exam8_1
+17. 
+18. 파일 업로드 처리 ,Exam9
+-----------------------------------------------
+
+
+
+
+
+
+
+
+
