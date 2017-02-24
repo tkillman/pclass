@@ -21,23 +21,28 @@ public class PdsItemDao {
 		return instance;
 	}
 	
+	
 	private PdsItemDao() {
 	}
 
 	
 	//  table pds_item 전체 수 구함
 	public int selectCount(Connection conn) throws SQLException {
+		
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select count(*) from pds_item");
 			rs.next();
+			
 			return rs.getInt(1);
+			
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(stmt);
 		}
+		
 	}
 	
 	//
@@ -54,18 +59,29 @@ public class PdsItemDao {
 			pstmt.setInt(1, endRow);
 			pstmt.setInt(2, firstRow);
 			rs = pstmt.executeQuery();
+			
 			if (!rs.next()) {
+				//빈 list 객체 반환
 				return Collections.emptyList();
 			}
+			
+			
 			List<PdsItem> itemList = new ArrayList<PdsItem>();
 			do {
+				//rs 값을 PdsItem 넣는 메소드를 따로 지정
 				PdsItem article = makeItemFromResultSet(rs);
+				
 				itemList.add(article);
+				
 			} while (rs.next());
+			
 			return itemList;
+			
 		} finally {
+			
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
+			
 		}
 	}
 	
@@ -90,6 +106,7 @@ public class PdsItemDao {
 		ResultSet rs = null;
 		
 		try {
+			
 			pstmt = conn.prepareStatement("select * from pds_item " + "where pds_item_id = ?");
 			pstmt.setInt(1, itemId);
 			rs = pstmt.executeQuery();
@@ -125,13 +142,16 @@ public class PdsItemDao {
 			pstmt.setString(2, item.getRealPath()); // 경로
 			pstmt.setLong(3, item.getFileSize()); // 파일 크기
 			pstmt.setString(4, item.getDescription()); // 작성한 description
+			
+			
 			int insertedCount = pstmt.executeUpdate();
 
+			
 			if (insertedCount > 0) {
 				
 				stmt = conn.createStatement();
 				
-				//??????????????????
+				//
 				rs = stmt.executeQuery("select pds_item_id_seq.CURRVAL from dual");
 				
 				if (rs.next()) {

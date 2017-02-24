@@ -11,7 +11,9 @@
 	
 	// 요청한 페이지 넘버가 있다면 세팅
 	if (pageNumberString != null && pageNumberString.length() > 0) {
+		
 		pageNumber = Integer.parseInt(pageNumberString);
+		
 	}
 	
 	// getPdsItemList(PageNumber) 를 통해 startRow와 endRow에 해당하는 PdsItemListModel을 불러온다.
@@ -30,13 +32,14 @@
 		int endPageNumber = beginPageNumber + 9;
 		
 		
+		// 페이징 처리 
 		if (endPageNumber > itemListModel.getTotalPageCount()) {
 			endPageNumber = itemListModel.getTotalPageCount();
 		}
 	
-		
 		request.setAttribute("beginPage", beginPageNumber);
 		request.setAttribute("endPage", endPageNumber);
+		
 		
 	}
 	

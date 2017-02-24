@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
 	response.addHeader("Cache-Control", "no-store");
 	response.setDateHeader("Expires", 1L);
-	
-	
+		
 %>
 
 <html>
@@ -20,8 +20,7 @@
 $(function(){
 	
 	$('#deleteBtn').on("click",function(){
-		
-		
+				
 		$('#checkForm').submit();
 		
 	})
@@ -38,15 +37,16 @@ $(function(){
 
 	<c:if test="${listModel.totalPageCount > 0}">
 	<tr>
+		
 		<td colspan="7">
 		${listModel.startRow}-${listModel.endRow}
 		[${listModel.requestPage}/${listModel.totalPageCount}]
 		</td>
+		
 	</tr>
 	</c:if>
 	
 	<tr>
-	
 		<td>번호</td>
 		<td>파일명</td>
 		<td>파일크기</td>
@@ -59,6 +59,7 @@ $(function(){
 <c:choose>
 	
 	<c:when test="${listModel.hasPdsItem == false}">
+	<!-- boolean 타입은 isHasPdsItem 메소드를 부른다. -->
 	<tr>
 		<td colspan="7">
 			게시글이 없습니다.
@@ -67,6 +68,7 @@ $(function(){
 	</c:when>
 	
 	<c:otherwise>
+	
 	<c:forEach var="item" items="${listModel.pdsItemList}">
 	
 	<tr>
@@ -83,7 +85,7 @@ $(function(){
 	<tr>
 		<td colspan="7">
 		
-		<c:if test="${beginPage > 10}">
+		<c:if test="${ beginPage > 10}">
 			<a href="list.jsp?p=${beginPage-1}">이전</a>
 		</c:if>
 		<c:forEach var="pno" begin="${beginPage}" end="${endPage}">

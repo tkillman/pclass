@@ -16,6 +16,7 @@ public class FileDownloadHelper {
 			byte[] data = new byte[8096];
 			int len = -1;
 			while ((len = is.read(data)) != -1) {
+				
 				os.write(data, 0, len);
 				
 			}

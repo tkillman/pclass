@@ -9,8 +9,8 @@
 
 <% 
 
-
 PdsItemDao dao =PdsItemDao.getInstance();
+
 
 String id = request.getParameter("id");
 if(id!=null){
@@ -21,8 +21,6 @@ if(id!=null){
 
 
 String[] ids = request.getParameterValues("ids"); 
-
-
 if(ids!=null){
 	
 	System.out.println("오예");

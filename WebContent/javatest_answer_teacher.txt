@@ -1,15 +1,15 @@
-1) 4번 오크 였다.
+﻿1) 4번 오크 였다.
 2) 2번 썬사에서 개발된 언어
 3) oop , 객체지향언어 
-4) 2, 메인 메소드는 자동 실행된다.
+4)
 5) 2 ??????
 6) 1
 7) 1
 8) 1
-9) 1 확장자는 java
+9) 
 10) 1
 11) 구별한다
-12) 반드시 지킬 필요는 없지만 여러 프레임워크를 사용하면서 오류가 나지 않으려면 지켜주는게 좋다.
+12) 반드시 지킬 필요는 없지만 
 13) 
 
 반드시 지킬  것
@@ -31,18 +31,15 @@ char
 
 15) 10진수 : 189 , 8진수 : 275 , 16진수 : BD
 
-16) char는 4byte 이므로  16bit, 부호가 없다면  2의 16승  -1
+16) 
 
-17) float f = (float) d
+17) float f = (float) d;
 
 18) final
 
 19) i ==11 , n ==0
 
-20) 에러발생 , javac로 컴파일 시키고, 
-java 명령어로 class 파일을 실행시킬 수 있는데 123이 String[] 로 가서 0번째 index에 저장되므로  이 파일의 args[1] 은 존재하지 않는다.
-
-
+20) 
 
 21) 에러 발생, int a 의 값이 정의되지 않음.
 
@@ -75,8 +72,6 @@ class test2 {
 그러면 메소드인  void Test()를 반환형 void를 없애고 생성자로 만든다.
 
 27) 
-  class 앞에 올 수 있는 접근제어자는 public 과 default 밖에 안된다.
-
 
 28) 인스턴스 변수를 스태틱 메소드에서 부를 순 없다.
 
@@ -87,8 +82,7 @@ class test2 {
 
 30) 자신의 생성자 this() , 조상의 생성자 super()
 
-주의점 : this()나 super()는 항상 맨 처음 실행시켜줘야한다.
-그렇기 때문에 this()나 super()는 같이 나올 수가 없다.
+주의점 : ???? 항상 super()를 먼저 부른다???????
 
 
 31) Test.a = Test.a + a;
@@ -100,21 +94,19 @@ class test2 {
 상속 받았을 때 변수의 경우 super부터 찾고
 메소드가 오버라이딩 됐을 때는 서브 클래스의 메소드가 호출된다.
 
-33) 접근제어자가 다르기 때문에 오버라이딩되지 않았다.
-
-
+33) 
 
 34) Equal 11
 a++이 실행되는 순간은 10이므로 if문 안이 실행되고
 다음 a 값은 11이 된다.
 
-35) 4, boolean 1bit이다.
+35)
 
-36) E , 생성자는 오버로딩이 가능하다.
+36) 
 
-37) D
+37) 2개
 
-38) c?? 넓게??
+38) 2개
 
 39) A
 
@@ -138,12 +130,16 @@ a++이 실행되는 순간은 10이므로 if문 안이 실행되고
 
 47) this
 
-48) 클래스는 단순 코드 , 객체는 실제 메모리에 올라가는 형태
+48) 
+===========================================================
+클래스는 변수나 메서드를 정의하는 구조를 구현한 것이고, 
+객체는 해당 클래스 구조에 따라 실질적 메모리를 생성하여 활용하는 것. 
+=============================================================
 
 49) 오버로딩 : 같은 클래스 내에서 이름이 같은 메소드
 	오버라이딩 : 상속받은 클래스의 조상 클래스와 자식클래스의 이름이 같은 메소드
 
-50) 1. private static 변수명 에 자신의 객체를 담는다.
+50) 1. static 한 변수에 자신의 객체를 담는다.
     2. 생성자는 private으로 선언해 new 연산자를 통한 객체 생성이 불가능하게 만든다.
     3. public static 객체  메소드이름(){} 를 정의해서 누구나 접근가능하도록 하고
        	메소드를 통해 static 변수를 반환하도록 해준다.
@@ -154,118 +150,26 @@ a++이 실행되는 순간은 10이므로 if문 안이 실행되고
 
 53) 
 
+50~ 53번 코드 작성 요망!!
 
 
-질문 할 것??
-20번, 30번, 38번, 40번 , 
+
 
 
 오답 
 4번, 9번 , 16번 , 20번 , 27번 , 33번 , 35번, 36번, 
 
+풀어보기
+4, 9번 , 20번, 27번 ,33번, 35번, 36번
 
-[Car.java]
-package javaQ;
+
+궁금 한 것
+
+16번, 
+
+ 
 
 
-class Car{
-	 protected int speed;	//자동차 속도
-	 protected String name;
-	
-	public Car(){}
-	 
-	 public Car(String carName){
-		 this.name = carName;
-	 }
-	
-	 //- speedUp    void	없음	  public 자동차 속도 1증가
-	public void speedUp(){
-		this.speed +=1;
-	}
-	 
-	public void speedDown(){
-		this.speed -=1;
-	}
-	
-	public void stop(){
-		this.speed =0;
-	}
-	
-	public void display(){
-		System.out.println(speed + " , " + name);
-	}
-	
-	
-}
-
-[Taxi.java]
-package javaQ;
-
-class Taxi extends Car{
-
-	private int charge; // 택시요금
-	private boolean fare; // 할증여부
-	private String company;
-
-	public Taxi(String taxiCompany) {
-
-		this.company = taxiCompany;
-
-	}
-
-	
-	public void accounts(){
-		
-		if(fare){
-		 charge = charge+(speed*12);
-		} else{
-		 charge = charge+(speed*10);
-		}
-		
-	}
-	
-	public void setFare(boolean fare){
-		this.fare= fare;
-	}
-	
-	public void display(){
-		StringBuffer str = new StringBuffer(company +" , "+ charge + " , ");
-		
-		if(fare){
-			str.append("할증");
-		} else {
-			str.append("일반");
-		}
-		
-		System.out.println(str);
-		
-		
-	}
-
-}
-
-[test.java]
-package javaQ;
-
-public class test {
-
-	public static void main(String[] args) {
-		
-		Taxi taxi = new Taxi("서울택시");
-		
-		taxi.setFare(true);
-		
-		
-		taxi.speedUp();
-		taxi.speedUp();
-		
-		taxi.accounts();
-		
-		taxi.display();
-		
-	}
-	
-}
 
 
 

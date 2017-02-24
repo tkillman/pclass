@@ -5,6 +5,8 @@ import java.util.List;
 
 // 리스트로 뿌려줄 Dto
 public class PdsItemListModel {
+	
+	
 	private List<PdsItem> pdsItemList;
 	private int requestPage;
 	private int totalPageCount;
@@ -13,7 +15,9 @@ public class PdsItemListModel {
 
 	
 	public PdsItemListModel() {
+		
 		this(new ArrayList<PdsItem>(), 0, 0, 0, 0);
+		
 	}
 	
 	
@@ -32,10 +36,13 @@ public class PdsItemListModel {
 		return pdsItemList;
 	}
 	
+	
+	// 글이 있다면 true 반환, 글이 없다면 false 반환
 	public boolean isHasPdsItem() {
 		return ! pdsItemList.isEmpty();
 	}
 
+	
 	public int getRequestPage() {
 		return requestPage;
 	}

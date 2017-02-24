@@ -33,11 +33,13 @@ public class ListPdsItemService {
 		}
 		
 		// PdsItemDao 디비에 접근
+		
 		PdsItemDao pdsItemDao = PdsItemDao.getInstance();
 		Connection conn = null;
 		
 		
 		try {
+			
 			conn = ConnectionProvider.getConnection();
 			
 			// totalArticleCount 에 table pds_item 등록
@@ -46,6 +48,7 @@ public class ListPdsItemService {
 			if (totalArticleCount == 0) { //써진 글이 없다면 비어있는 PdsItemListModel 객체 반환
 		
 				return new PdsItemListModel();
+				
 			}
 			
 			//전체 있어야 할 페이지 수 
@@ -57,7 +60,9 @@ public class ListPdsItemService {
 
 			//실질적으로 있어야 할 페이지 수로 endRow를 설정
 			if (endRow > totalArticleCount) {
+		
 				endRow = totalArticleCount;
+				
 			}
 			
 			
@@ -79,15 +84,18 @@ public class ListPdsItemService {
 	
 	private int calculateTotalPageCount(int totalPdsItemCount) {
 		
+		
 		if (totalPdsItemCount == 0) {
 			return 0;
 		}
+		
 		
 		int pageCount = totalPdsItemCount / COUNT_PER_PAGE;
 		
 		if (totalPdsItemCount % COUNT_PER_PAGE > 0) {
 			pageCount++;
 		}
+		
 		return pageCount;
 		
 	}

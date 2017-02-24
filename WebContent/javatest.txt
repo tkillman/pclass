@@ -74,7 +74,7 @@
 14). 자바에서 제공하는 기본형 데이터타입을 모두 나열하라. 
 
 
-15). 2진수 "1011 1101"을 16진수,8진수, 10진수로 표현하라.       
+15). 2진수 "1011 1101"을 16진수, 8진수, 10진수로 표현하라.       
 
 
 16). 자바 언어에서 char형은 부호 없는 정수로 취급 될 수 있다. 이때 최대값은 얼마가 되는가? 		
@@ -97,6 +97,7 @@
 
 
 20). 아래와 같은 명령행으로 프로그램을 실행하였을 때 결과는 무엇인가? 
+    
      C:\> java TestJava 123
     
      public class TestJava {
@@ -183,12 +184,15 @@
   }   
 
 27). 다음 프로그램의 문제점은 무엇인가?
+  
    protected class Fred {
+          
           private int x = 0;
          
           private Fred (int xval) {
                x=xval;
           }
+          
    }
 
 28). 다음 프로그램은 컴파일되지 않는다. 이유는 무엇인가?
@@ -257,10 +261,13 @@
    }
 
 33) 다음 프로그램의 실행 결과를 적으시오. (만일 실행할 수 없다면 그 이유를 적으시오.)
+
 public class Poliymorphism {
+	
 	private void f() {
 		System.out.println("base class");
 	}
+	
 	public static void main(String[] argv) {
 		Poliymorphism po = new Derived();
 		po.f();
@@ -268,6 +275,7 @@ public class Poliymorphism {
 }
 
 class Derived extends Poliymorphism {
+	
 	public void f() {
 		System.out.println("sub class");
 	}
@@ -318,6 +326,7 @@ B. 매개변수의 수와 타입,리턴타입이 모두 같아야 한다.
 C. 접근 제어자는 조상의 메서드보다 좁은 범위로만 변경할 수 있다. 
 D. 조상의 메서드보다 더 많은 수의 예외를 선언할 수 있다. 
 
+
 -- 39. 다음 중 아래 add메서드를 잘못 오버로딩 한 것은? 
 
 long add(int a, int b) { return a+b;}
@@ -333,6 +342,7 @@ A. String 멤버변수는 “”로 자동 초기화된다.
 B. 지역변수는 반드시 초기화해야 한다. 
 C. 생성자보다 초기화 블럭이 먼저 수행된다. 
 D. 인스턴스변수보다 클래스변수가 먼저 초기화된다. 
+
 
 41). 다음 중 지역변수에 대한 설명으로 옳지 않은 것은? 
 A. 자동 초기화되므로 별도의 초기화가 필요없다. 
@@ -421,6 +431,7 @@ public class AutoBoxing {
 
 51) 멤버변수와 생성자, 메소드를 가지는 Car 클래스를 작성하시오.
 
+
 *클래스 이름  : Car
 *멤버변수 : protected int speed	//자동차 속도
 	   protected String name//자동차 이름
@@ -429,24 +440,13 @@ public class AutoBoxing {
 -모든 멤버변수를 0 또는 null 로 초기화 하는 생성자
 -자동자의 이름을 매개변수로 받아 초기화 하는 생성자
 
+
 *메소드 작성
 메소드명   리턴타입  매개변수 접근제어자 용도
 - speedUp    void	없음	  public 자동차 속도 1증가
 - speedDown  void	없음	  public 자동차 속도 1감소
 - stop	     void	없음	  public 자동차 속도 0 설정
 - display    void	없음	  public 자동자이름, 속도 출력
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -462,7 +462,7 @@ public class AutoBoxing {
 
 *메소드 작성
 메소드명  리턴타입  매개변수 접근제어자 용도
-- accounts void	    없음     public	요금계산(속도 *10 , 할증시 속도*12)
+- accounts void	    없음     public	요금계산 (속도 *10 , 할증시 속도*12)
 - setFare  void    boolean   public	할증여부 설정
 - display  void	   없음	     public	택시회사이름, 요금, 할증여부 출력
 
@@ -471,15 +471,5 @@ public class AutoBoxing {
 53) 위 52번의 Taxi 클래스 객체를 생성하여, 할증을 설정하고, 속도를 2까지 올린 상태에서 요금을 계산하시오.
 	
 *객체생성시 택시회사 이름은 "서울택시" 라고 설정한다.
-
-
-
-
-
-
-
-
-
-
 
 

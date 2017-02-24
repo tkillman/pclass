@@ -9,7 +9,7 @@ import java.util.Random;
 public class FileSaveHelper {
 	
 	private static Random random = new Random();
-
+	
 	//directroy 는 파일이 저장될 경로, InputStream은 올린 파일을 메모리나 임시 저장소에 저장한 item에서 inputStream을 연결한 것
 	public static String save(String directory, InputStream is) 	throws IOException {
 	
@@ -23,7 +23,7 @@ public class FileSaveHelper {
 
 		//새로운 파일 생성.
 		File file = new File(directory, fileName);
-		
+		 
 		//아웃풋 스트림 객체변수 선언
 		FileOutputStream os = null;
 	

@@ -14,7 +14,7 @@
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
 	if (!isMultipart) {
-		//아니라면 ?????????
+		//아니라면 HttpServletResponse.SC_BAD_REQUEST 잘못된 요청
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		return;
 	}
@@ -34,8 +34,10 @@
 	AddRequest addRequest = new AddRequest();
 	
 	Iterator<FileItem> iter = items.iterator();
+	
 	while (iter.hasNext()) {
 		FileItem item = iter.next();
+		
 		if (item.isFormField()) { // type="file" 이면 false 반환 아니면 true 반환
 			String name = item.getFieldName();
 			if (name.equals("description")) { // input type="text" name="description"
@@ -48,7 +50,7 @@
 			if (name.equals("file")) { // input 태그 네임이  file
 				
 				String realPath = FileSaveHelper.save("c:\\Java\\pds", item.getInputStream());
-				System.out.println(realPath);
+				//System.out.println(realPath);
 				
 				addRequest.setFileName(item.getName()); //파일의 원본 이름
 				addRequest.setFileSize(item.getSize()); //파일 크기
@@ -63,6 +65,7 @@
 	
 	
 %>
+
 <html>
 <head><title>업로드 성공</title></head>
 <body>

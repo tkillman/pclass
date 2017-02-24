@@ -21,6 +21,7 @@ public class IncreaseDownloadCountService {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
+			
 			int updatedCount = PdsItemDao.getInstance().increaseCount(conn, id);
 			return updatedCount == 0 ? false : true;
 		} catch (SQLException e) {
