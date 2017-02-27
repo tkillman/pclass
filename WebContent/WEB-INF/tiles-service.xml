@@ -3,6 +3,7 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
+
 <tiles-definitions>
 <!-- http://host:port/project¸í/help.home.tiles -->
 	<definition name="help.home" template="/jsp/Exam10/tiles/template/layout_help.jsp">
@@ -14,6 +15,3 @@
 	</definition>
 	
 </tiles-definitions>
-
-
-

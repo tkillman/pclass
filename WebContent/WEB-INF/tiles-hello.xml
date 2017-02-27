@@ -13,22 +13,40 @@
 		<put-attribute name="footer" value="/jsp/Exam10/tiles/template/footer.jsp" />
 	</definition>
 
-	<definition name="hello2" template="/jsp/Exam10/tiles/template/layout.jsp">
+	<!-- <definition name="hello2" template="/jsp/Exam10/tiles/template/layout.jsp"> -->
+	<!-- tiles를 상속받는 extends 사용 가능하다. -->
+	
+	<definition name="hello2" extends="hello">
 		<put-attribute name="title" value="헬로우 월드2" />
 		<put-attribute name="header" value="/jsp/Exam10/tiles/template/header2.jsp" />
+		
+		<put-attribute name="body">
+		
+<!--  put-attribute의 값으로 definition을 다시 한번 정의해서 부를 수 있다. -->		
+		
+		<definition template="/jsp/Exam10/tiles/template/layout.jsp">
+		<put-attribute name="title" value="헬로우 월드" />
+		<put-attribute name="header" value="/jsp/Exam10/tiles/template/header.jsp" />
 		<put-attribute name="menu" value="/jsp/Exam10/tiles/template/menu.jsp" />
 		<put-attribute name="body" value="/jsp/Exam10/tiles/hello_body.jsp" />
+		<put-attribute name="footer" value="/jsp/Exam10/tiles/template/footer.jsp" />
+		</definition>
+			
+		</put-attribute>
 		<put-attribute name="footer" value="/jsp/Exam10/tiles/template/footer2.jsp" />
+		
 	</definition>
 
-	<definition name="home" template="/jsp/Exam10/tiles/template/layout.jsp"
-		preparer="tiles.MenuViewPreparer">
+
+	<!--  preparer을 설정하면 그 해당 클래스의 객체에 execute() 메소드를 부른다. -->
+	<definition name="home" template="/jsp/Exam10/tiles/template/layout.jsp" preparer="tiles.MenuViewPreparer">
 		<put-attribute name="title" value="헬로우 월드: 홈" />
 		<put-attribute name="header" value="/jsp/Exam10/tiles/template/header.jsp" />
 		<put-attribute name="menu" value="/jsp/Exam10/tiles/template/home_menu.jsp" />
 		<put-attribute name="body" value="/jsp/Exam10/tiles/home_body.jsp" />
 		<put-attribute name="footer" value="/jsp/Exam10/tiles/template/footer.jsp" />
 	</definition>
+
 
 </tiles-definitions>
 

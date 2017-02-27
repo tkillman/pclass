@@ -4,9 +4,9 @@
 <head>
 	<title>안녕하세요</title>
 	<style type="text/css">
-	.content {font-size: 12pt}
+	.content {font-size: 30pt}
 	</style>
-</head>
+</head>	
 <body>
 	<div class="content">안녕하세요!</div>
 </body>

@@ -111,10 +111,11 @@
      
      class Test {
             
-              static int a = 1;
+               static int a=1;
               
               public static void main(String[] args) {
-                        int a;
+                        int a ;
+                        
                         System.out.println(a);
               }
      }
@@ -298,9 +299,10 @@ public class OperatorTest {
 
 
 35) 자바 데이터 타입에 대한 설명 중 틀린 것을 고르시오.
+
 ① String 타입은 객체형이다.
 ② char 타입 변수는 2 byte의 메모리 공간을 사용한다.
-③ char 타입 변수 선언 시 기본 값을 지정하지 않으면 ‘\u00000’ 값이 설정된다.
+③ char 타입 변수 선언 시 기본 값을 지정하지 않으면 ‘\u0000’ 값이 설정된다.
 ④ boolean 타입은 1 byte의 메모리 공간을 사용한다.
 ⑤ int 타입 변수는 4 byte의 메모리 공간을 사용한다.
 

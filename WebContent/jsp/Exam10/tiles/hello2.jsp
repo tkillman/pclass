@@ -4,3 +4,6 @@
 	request.setAttribute("greeting", "환영합니다.");
 %>
 <tiles:insertDefinition name="hello2" />
+
+
+

@@ -1,0 +1,49 @@
+
+
+tiles 
+
+<정의>
+jsp include 액션태그와 유사한 기능이지만 xml에 설정할 수 있다는 장점이 있다.
+
+<사용 방법>
+ 
+ 1. web.xml에 param-value에 자신이 지정할 xml파일을 설정한다.
+ 
+ <servlet>
+    <servlet-name>tiles</servlet-name>
+    <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+    <init-param>
+      <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+      <param-value> /WEB-INF/tiles-hello.xml,/WEB-INF/tiles-service.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+
+2. 
+자신이 지정할 xml파일을 이러한 순서로 설정한다.
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="hello" template="/jsp/Exam10/tiles/template/layout.jsp">
+		<put-attribute name="title" value="헬로우 월드" />
+		<put-attribute name="header" value="/jsp/Exam10/tiles/template/header.jsp" />
+		<put-attribute name="menu" value="/jsp/Exam10/tiles/template/menu.jsp" />
+		<put-attribute name="body" value="/jsp/Exam10/tiles/hello_body.jsp" />
+		<put-attribute name="footer" value="/jsp/Exam10/tiles/template/footer.jsp" />
+	</definition>
+
+
+3. 사용할 jsp에서  <@ taglib prefix="tiles"> 를 설정하고
+
+* 데피니션을 부를 때
+<tiles:insertDefinition name="hello" >
+
+* attribute를 부를 때 
+
+
+

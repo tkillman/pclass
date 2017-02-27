@@ -1,0 +1,28 @@
+
+
+
+
+
+ 1. 내가 url을 요청한다.
+ 
+ 2. web.xml에 
+	 <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>
+	com.opensymphony.sitemesh.webapp.SiteMeshFilter
+	</filter-class>
+ 	 </filter>
+  	
+  	<filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/jsp/Exam10/sitemesh/*</url-pattern>
+	  </filter-mapping>
+	  
+
+url-pattern 에 지정한 url이 설정되어 있으면 필터가 실행되어 있으며
+
+요청한 url에 자원을 실행한다.
+
+3. 실행된 자원을 response해주는데 필터를 다시 거쳐서 decorators.xml에 지정된
+
+pattern에 맞는 decorator 태그에 값을 전달해 필터를 거친 response를 클라이언트에게 보내준다.

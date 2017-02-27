@@ -43,6 +43,28 @@
   
   <!-- 지역을 한국으로 설정하겠다. -->
   
+  
+  
+  <!-- filter 사용 시작 -->
+    <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>
+	com.opensymphony.sitemesh.webapp.SiteMeshFilter
+	</filter-class>
+ 	 </filter>
+  	
+  	<filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/jsp/Exam10/sitemesh/*</url-pattern>
+	  </filter-mapping>
+	  
+    <!-- filter 사용 끝 -->
+  
+  
+  
+  
+  
+  
   <!-- load-on-startup의 뜻은 서버가 시작할 때 1번 실행해라. -->
   
   <servlet>
@@ -51,7 +73,50 @@
   <load-on-startup>1</load-on-startup>
   </servlet>
   
-  <!-- <servlet>
+  <!--  tiles 이용을 위한 servlet 등록 시작 -->
+    
+    <!-- ',' 앞뒤로 공백을 주면 안된다!!!!!!!!!!!!!!!!!!!!!! -->
+    
+     <servlet>
+    <servlet-name>tiles</servlet-name>
+    <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+    <init-param>
+      <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+      <param-value> /WEB-INF/tiles-hello.xml,/WEB-INF/tiles-service.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  
+    <!--  tiles 이용을 위한 servlet 등록 끝 -->
+  
+  
+  <!-- url 요청을 통한 tiles를 부르는 방법 -->
+  <servlet>
+    <servlet-name>TilesDispatchServlet</servlet-name>
+    <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+    <servlet-name>TilesDispatchServlet</servlet-name>
+    <url-pattern>*.tiles</url-pattern>
+  </servlet-mapping> 
+  
+  
+  
+  
+  <!-- 타일 요청을 uri를 통해 지정할 수 있도록  -->
+   
+   
+  
+  
+  
+  <!-- 
+  
+  servlet 사용 시작
+  
+  <servlet>
   <servlet-name>NowServlet</servlet-name>
   <servlet-class>day01.NowServlet</servlet-class>
   </servlet>
@@ -61,9 +126,14 @@
   <servlet-name>NowServlet</servlet-name>
   <url-pattern>/Now</url-pattern>
   </servlet-mapping>
+   
+   servlet 사용 끝
    -->
    
-   <!-- <error-page>
+   <!-- 
+   
+   에러 페이지 설정 시작
+   <error-page>
    <error-code>404</error-code>
    <location>/Exam4/error/error404.jsp</location>
    </error-page>
@@ -72,10 +142,13 @@
    <error-page>
    <exception-type>java.lang.NullPointerException</exception-type>
    <location>/Exam4/error/errorNullPointer.jsp</location>
-   </error-page> -->
+   </error-page> 
+   
+   에러 페이시 설정 끝
+   -->
  
- 
- 
+ <!-- servlet 사용 시작 -->
+ <!-- 
 	<servlet>
    <servlet-name>MessageDaoProviderInit</servlet-name>
   <servlet-class>dao.MessageDaoProviderInit</servlet-class>
@@ -84,9 +157,13 @@
   	<param-value>oracle</param-value>
   </init-param>
   <load-on-startup>1</load-on-startup>
-	</servlet>
+	</servlet> -->
   
+<!--  -->
 
+
+<!-- jsp 초기 설정값 지정 시작  -->
+  
    <jsp-config>
    <jsp-property-group>
    <url-pattern>/jsp/Exam3/view/*</url-pattern>
@@ -95,11 +172,16 @@
    </jsp-property-group>
    </jsp-config>
    
+   <!-- jsp 초기 설정값 지정 끝 -->
    
-  <!--  <error-page>
+  <!--  
+  
+  <error-page>
    <exception-type>java.lang.NumberFormatException</exception-type>
    <location>/guestBook/errorView.jsp</location>
    </error-page>
+   
+   
    --> 
    
 </web-app>
