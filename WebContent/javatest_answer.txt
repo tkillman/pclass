@@ -42,6 +42,7 @@ char
 20) 에러발생 , javac로 컴파일 시키고, 
 java 명령어로 class 파일을 실행시킬 수 있는데 123이 String[] 로 가서 0번째 index에 저장되므로  이 파일의 args[1] 은 존재하지 않는다.
 
+인수를 여러개 넣으려면 띄어쓰기를 한다.
 
 
 21) 에러 발생, int a 의 값이 정의되지 않음.
@@ -50,6 +51,7 @@ java 명령어로 class 파일을 실행시킬 수 있는데 123이 String[] 로
 'a' 는 char형으로 비교 시 아스키값 97로 비교된다 . {0, 48, 65, 97} 비교 
 
 23)
+
 class test2 {
 
 	public static void main(String[] args) {		
@@ -114,7 +116,7 @@ a++이 실행되는 순간은 10이므로 if문 안이 실행되고
 
 37) D
 
-38) c?? 넓게??
+38) c ,d 같거나 넓은
 
 39) A
 
@@ -254,19 +256,12 @@ public class test {
 		Taxi taxi = new Taxi("서울택시");
 		
 		taxi.setFare(true);
-		
-		
+			
 		taxi.speedUp();
 		taxi.speedUp();
 		
 		taxi.accounts();
 		
-		taxi.display();
-		
+		taxi.display();		
 	}
-	
 }
-
-
-
-

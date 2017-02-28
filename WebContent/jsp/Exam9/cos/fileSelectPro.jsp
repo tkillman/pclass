@@ -27,7 +27,7 @@ String content = "";
 
 try
 {
-	MultipartRequest multi = new MultipartRequest( request,realPath,maxSize,type,new DefaultFileRenamePolicy());
+	MultipartRequest  multi = new MultipartRequest( request,realPath,maxSize,type,new DefaultFileRenamePolicy());
 											   
 	user = multi.getParameter("txtUser");
 	title = multi.getParameter("txtTitle");

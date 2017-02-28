@@ -8,6 +8,9 @@
 
 <%
 	int number = 10;
+	
+
+	request.setAttribute("greeting", "request greeting 에 저장된 값");
 %>
 
 

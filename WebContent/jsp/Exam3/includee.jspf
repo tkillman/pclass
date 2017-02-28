@@ -5,3 +5,5 @@ includer.jsp에서 지정한 번호: <%= number %>
 <%
 	String dataFolder = "c:\\data";
 %>
+
+<%=request.getAttribute("greeting")%>
