@@ -1,0 +1,391 @@
+***Model2(MVC)패턴***
+JSP : HTML <==== Java
+Servlet : Java <==== HTML
+
+1.간단한 MVC패턴 연습.(실행)
+[SimpleController.java]
+package mvc;
+
+import java.io.IOException;
+
+
+import javax.servlet.RequestDispatcher;
+
+import javax.servlet.ServletException;
+
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+
+
+public class SimpleController extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+	
+	private void processRequest(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+		// 2단계, 요청 파악
+		// request 객체로부터 사용자의 요청을 파악하는 코드 -무슨타입인지 받음
+		String type = request.getParameter("type");
+		
+		// 3단계, 요청한 기능을 수행한다.
+		// 사용자에 요청에 따라 알맞은 코드
+		// type을 분석해서 처리 끝!
+		Object resultObject = null;
+		if (type == null || type.equals("greeting")) {
+			resultObject = "안녕하세요.";
+		} else if (type.equals("date")) {
+			resultObject = new java.util.Date();
+		} else {
+			resultObject = "Invalid Type";
+		}
+		
+		// 4단계, request나 session에 처리 결과를 저장
+		request.setAttribute("result", resultObject);
+		
+		// 5단계, RequestDispatcher를 사용하여 알맞은 뷰로 포워딩
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/simpleView.jsp");
+		dispatcher.forward(request, response);
+	}
+}
+
+[web.xml]
+// 많이 사용하는 servlet
+<servlet>
+	<servlet-name>SimpleController</servlet-name>
+	<servlet-class>mvc.SimpleController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>SimpleController</servlet-name>
+	<url-pattern>/simple</url-pattern>
+</servlet-mapping>
+
+[/WebContent/simpleView.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+
+<html>
+<head><title>뷰</title></head>
+<body>
+
+결과: ${ result }
+
+</body>
+</html>
+
+http://localhost:8080/projectname/simple
+http://localhost:8080/projectname/simple?type=
+http://localhost:8080/projectname/simple?type=date
+http://localhost:8080/projectname/simple?type=greeting
+
+======================================================================================================================
+
+2번 : Command 패턴
+
+1[CommandHandler.java]
+package mvc.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public interface CommandHandler {
+	public String process(HttpServletRequest request,HttpServletResponse response) throws Throwable;
+}
+
+2[HelloHandler.java]
+package mvc.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import mvc.command.CommandHandler;
+
+public class HelloHandler implements CommandHandler {
+	
+	@Override
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		request.setAttribute("hello", "안녕하세요!");
+		return "/view/hello.jsp";
+	}
+}
+
+3[NullHandler.java]
+package mvc.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class NullHandler implements CommandHandler {
+
+	@Override
+	public String process(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+		return "/view/nullCommand.jsp";
+	}
+}
+
+4[/WEB-INF/commandHandler.properties]
+hello=mvc.command.HelloHandler
+
+
+5[web.xml]
+<servlet>
+	<servlet-name>ControllerUsingFile</servlet-name>
+	<servlet-class>mvc.controller.ControllerUsingFile</servlet-class>
+	<init-param>
+		<param-name>configFile</param-name>
+		<param-value>/WEB-INF/commandHandler.properties</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>ControllerUsingFile</servlet-name>
+	<url-pattern>/controllerUsingFile</url-pattern>
+</servlet-mapping>
+
+
+6.[ControllerUsingFile.java] (실행)
+package mvc.controller;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import mvc.command.CommandHandler;
+import mvc.command.NullHandler;
+
+public class ControllerUsingFile extends HttpServlet {
+
+	// <커맨드, 핸들러인스턴스> 매핑 정보 저장
+	private Map commandHandlerMap = new java.util.HashMap();
+
+	// web.xml에있는 param-value에 config를 받아서 String으로 받음
+	public void init(ServletConfig config) throws ServletException {
+		// 결론은 : web.xml > /WEB-INF/commandHandler.properties > prop객체로 옴김
+
+		String configFile = config.getInitParameter("configFile");
+		Properties prop = new Properties();
+		FileInputStream fis = null;
+		try {
+			// 절대경로값을 String으로 받음
+			String configFilePath = config.getServletContext().getRealPath(configFile);
+			fis = new FileInputStream(configFilePath);
+			prop.load(fis);
+		} catch (IOException e) {
+			throw new ServletException(e);
+		} finally {
+			if (fis != null)
+				try {
+					fis.close();
+				} catch (IOException ex) {
+				}
+		}
+
+
+		// hello 키값 , hellohanlder 클래스의 객체를 Map에 담았다.
+		Iterator keyIter = prop.keySet().iterator();
+		while (keyIter.hasNext()) {
+			String command = (String) keyIter.next();
+			String handlerClassName = prop.getProperty(command);
+			try {
+				Class handlerClass = Class.forName(handlerClassName);
+				Object handlerInstance = handlerClass.newInstance();
+				commandHandlerMap.put(command, handlerInstance);
+			} catch (ClassNotFoundException e) {
+				throw new ServletException(e);
+			} catch (InstantiationException e) {
+				throw new ServletException(e);
+			} catch (IllegalAccessException e) {
+				throw new ServletException(e);
+			}
+		}
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		process(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		process(request, response);
+	}
+
+	private void process(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		String command = request.getParameter("cmd");
+		CommandHandler handler = (CommandHandler) commandHandlerMap.get(command);
+		if (handler == null) {
+			handler = new NullHandler();
+		}
+		String viewPage = null;
+		try {
+			viewPage = handler.process(request, response);
+		} catch (Throwable e) {
+			throw new ServletException(e);
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
+	}
+}
+
+
+7[/WebContent/view/hello.jsp]
+<%@ page contentType = "text/html; charset=utf-8" %>
+<html>
+<head><title>Hello</title></head>
+<body>
+${hello}
+
+</body>
+</html>
+
+8[/WebContent/view/nullCommand.jsp]
+<%@ page contentType="text/html; charset=utf-8" %>
+<html>
+<head><title>에러</title></head>
+<body>
+
+잘못된 요청입니다.
+
+</body>
+</html>
+
+
+
+http://localhost:8080/projectname/controllerUsingFile?cmd=hello
+http://localhost:8080/projectname/controllerUsingFile
+
+======================================================================================================================
+
+3번 : URI 패턴
+
+1[commandHandlerURI.properties]
+/hello.do=mvc.command.HelloHandler
+
+2[web.xml]
+<servlet>
+	<servlet-name>ControllerUsingURI</servlet-name>
+	<servlet-class>mvc.controller.ControllerUsingURI</servlet-class>
+	<init-param>
+		<param-name>configFile2</param-name>
+		<param-value>
+			/WEB-INF/commandHandlerURI.properties
+		</param-value>
+	</init-param>
+</servlet>
+	
+<servlet-mapping>
+	<servlet-name>ControllerUsingURI</servlet-name>
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+
+3[ControllerUsingURI.java]
+package mvc.controller;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import mvc.command.CommandHandler;
+import mvc.command.NullHandler;
+
+public class ControllerUsingURI extends HttpServlet {
+
+	// <커맨드, 핸들러인스턴스> 매핑 정보 저장
+	private Map commandHandlerMap = new java.util.HashMap();
+
+	public void init(ServletConfig config) throws ServletException {
+		String configFile = config.getInitParameter("configFile2");
+		Properties prop = new Properties();
+		FileInputStream fis = null;
+		try {
+			String configFilePath = config.getServletContext().getRealPath(
+					configFile);
+			fis = new FileInputStream(configFilePath);
+			prop.load(fis);
+		} catch (IOException e) {
+			throw new ServletException(e);
+		} finally {
+			if (fis != null)
+				try {
+					fis.close();
+				} catch (IOException ex) {
+				}
+		}
+		Iterator keyIter = prop.keySet().iterator();
+		while (keyIter.hasNext()) {
+			String command = (String) keyIter.next();
+			String handlerClassName = prop.getProperty(command);
+			try {
+				Class handlerClass = Class.forName(handlerClassName);
+				Object handlerInstance = handlerClass.newInstance();
+				commandHandlerMap.put(command, handlerInstance);
+			} catch (ClassNotFoundException e) {
+				throw new ServletException(e);
+			} catch (InstantiationException e) {
+				throw new ServletException(e);
+			} catch (IllegalAccessException e) {
+				throw new ServletException(e);
+			}
+		}
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		process(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		process(request, response);
+	}
+
+	private void process(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String command = request.getRequestURI();
+		if (command.indexOf(request.getContextPath()) == 0) {
+			command = command.substring(request.getContextPath().length());
+		}
+		CommandHandler handler = (CommandHandler) commandHandlerMap.get(command);
+		if (handler == null) {
+			handler = new NullHandler();
+		}
+		String viewPage = null;
+		try {
+			viewPage = handler.process(request, response);
+		} catch (Throwable e) {
+			throw new ServletException(e);
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
+	}
+}
+
+
+
+http://localhost:8080/projectname/hello.do
+http://localhost:8080/projectname/*.do

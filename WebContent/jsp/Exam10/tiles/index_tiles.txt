@@ -38,6 +38,7 @@ jsp include 액션태그와 유사한 기능이지만 xml에 설정할 수 있�
 	</definition>
 
 
+
 3. 사용할 jsp에서  <@ taglib prefix="tiles"> 를 설정하고
 
 * 데피니션을 부를 때
