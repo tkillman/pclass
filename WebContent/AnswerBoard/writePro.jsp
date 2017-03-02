@@ -18,4 +18,5 @@
 	
     
     response.sendRedirect("list.jsp");
+    
 %>

@@ -8,6 +8,7 @@
 </head>
 
 <%
+
   //원글의 상태 , num==0이면 원글이다.
   int num=0,ref=0,re_step=0,re_level=0;
  
