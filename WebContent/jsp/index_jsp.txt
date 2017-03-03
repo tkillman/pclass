@@ -14,7 +14,7 @@
 10. 세션, Exam5
 11. <jsp:uesBean> , Exam6
 12. 데이터 베이스 기초 ,Exam7
-13. Dao, Dto 기본 구조, Exam8
+13. Dao, Dto 기본 구조, 회원가입 프로젝트, Exam8
 14. 이클립스 환경 설정
 15. EL(Expression Language), Exam8_1 
 EL에서 쓸 수 있는 변수는 core 태그에서 설정된 변수만!! <c:set>
@@ -22,7 +22,7 @@ EL에서 쓸 수 있는 변수는 core 태그에서 설정된 변수만!! <c:set
 
 16. JSTL(jsp standard tag library), Exam8_1
 17. 
-18. 파일 업로드 처리 ,Exam9
+18. 파일 업로드 처리 ,Exam9 , fileRoom project
 20.Tiles 이용 레이아웃 템플릿 , Exam10
 21. 필터 , Exam10
 
