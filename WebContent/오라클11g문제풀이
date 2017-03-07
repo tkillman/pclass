@@ -1,0 +1,199 @@
+<14쪽>
+EMP 테이블
+dept 테이블
+
+create table emp(
+empno number(4) not null --사원번호
+,ename varchar2(10) --이름
+,job varchar2(9) --업무명
+,mgr number(4) --상사번호
+,hiredate date  --입사일
+,sal number(7,2) --월급
+,comm number(7,2) --커미션
+,deptno number(2) --부서번호
+)
+
+create table dept(
+deptno number(2) not null --부서번호
+,dname varchar2(14) --부서이름 
+,loc  varchar2(13) --지역
+)
+
+<15쪽>
+1.sql
+2.sql developer
+3.select
+4.DML
+5.DDL
+6.DCL
+7.desc 테이블명 
+
+<17쪽>
+select distinct 
+from dept deptno
+
+
+<18쪽>
+1.
+select *
+from EMP
+where EMPNO=10
+
+
+2.
+select EMPNO, ENAME, SAL
+from EMP
+where SAL<2000
+
+3.
+select empno, ename, job
+from emp
+where ename = 'MILLER'
+
+
+4.
+
+select *
+from emp
+where sal between 1000 and 3000
+
+<19쪽>
+
+select *
+from emp
+where empno = 7844 or empno = 7654 or empno = 7521
+
+-----------------------
+
+select *
+from emp
+where not job = 'manager'
+----------------
+
+select empno,ename,sal
+from emp 
+where  sal>1500 and sal <2500
+
+---------------------------
+
+<20쪽>
+select ename, sal, comm
+from emp
+where comm in (30 , 500, 1400)
+----------------------------------
+
+
+<21쪽>
+select *
+from emp
+where not ename like '%d%'
+----------------------------
+
+<22쪽>
+
+select ename, job, mgr
+from  emp	
+where mgr is null
+
+-------------------------
+select empno, ename, sal
+from emp 
+order by sal desc
+
+----------------------
+
+select empno,ename,hiredate
+from emp
+order by hiredate desc
+
+
+<31쪽>
+
+select *
+from emp
+where hiredate>=1987/1/1 and hiredate<1988/12/31
+-----------------------------
+
+select *
+from emp
+where hiredate between 1987/1/1 and 1988/12/31
+
+------------------------------------------
+select *
+from emp
+where substr(hiredate,1,3) =87
+----------------------------------
+
+select *
+from emp
+where ename like '%k'
+-----------------------------
+
+select *
+from emp
+where substr(ename,-1,1) ='k'
+
+----------------------------
+
+<32쪽>
+
+select *
+from emp
+where ename like '__R%'
+----------------------------
+select *
+from emp
+where instr(ename,'R') =3
+-------------------------------
+<33쪽>
+select empno, ename, job
+from emp
+where instr(ename,'A') =2
+
+---------------------
+
+<35쪽>
+
+select empno, ename, job
+from emp
+where mod(empno,2)=0
+-----------------------------
+<36쪽>
+
+
+select hiredate - sysdate
+from emp
+where deptno =10
+
+<41쪽>
+
+select nvl(mgr,'CEO')
+from emp
+where mgr is null
+
+
+<42쪽>
+
+
+select empno,ename,job,sal,
+	case when job='ANALYST' then comm *1.5
+		 when job='salaryman' then comm*1.15
+		 when job='clerk' then comm*1.2
+		 end
+
+from emp
+
+<44쪽>
+select count(*), count(comm)
+from emp
+group by deptno
+
+-----------------------------
+
+
+
+
+
+
+
+
