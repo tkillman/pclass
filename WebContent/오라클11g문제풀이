@@ -190,6 +190,70 @@ group by deptno
 
 -----------------------------
 
+<61쪽>
+create table emp01(
+empno number(4)
+,ename varchar2(10)
+,job varchar2(9)
+,manager number(4)
+,hiredate date
+,sal number(7,2)
+,comm number(7,2)
+,deptno number(2)
+)
+
+
+----------------------------
+
+insert into emp01(empno,ename,job,manager,hiredate,sal) values(7369, 'smith','cleak', 7836, '1980/12/20', 800)
+insert into emp01 values(7499,'Allen','SALESMAN',7369,'1987/12/20',1600,300,30)
+insert into emp01(empno, ename, job, sal) values(7839, 'king', 'PRESIDENT', 5000)
+
+
+------------------------------------------------
+<80쪽>
+create table subject(
+no number not null primary key--일련번호 
+,s_num number(2) not null-- 학과번호
+,s_name varchar2(10) not null-- 학과명
+)
+
+----------------------------------
+create table student(
+no number not null primary key
+,sd_num number(8) not null
+,sd_name varchar2(10) not null
+,sd_id varchar2(15) not null
+,sd_passwd varchar2(50) not null
+,s_num number not null
+,sd_jumin varchar2(13) not null
+,sd_phone varchar2(8) not null
+,sd_address varchar2(50) not null
+,sd_email varchar2(50) not null
+,sd_date date not null
+)
+
+---------------------------------
+
+create table lesson(
+no number not null primary key
+, l_num number not null
+, l_name varchar2(30) not null
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
